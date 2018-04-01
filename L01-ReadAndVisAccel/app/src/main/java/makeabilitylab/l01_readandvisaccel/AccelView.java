@@ -207,7 +207,7 @@ public class AccelView extends View implements SensorEventListener {
                 _rawAccelValues[2] = sensorEvent.values[2];
 
                 // Smoothing algorithm adapted from: https://www.arduino.cc/en/Tutorial/Smoothing
-                for(int i=0; i<2; i++){
+                for (int i = 0; i < 3; i++) {
                     _runningAccelTotal[i] = _runningAccelTotal[i] - _accelValueHistory[i][_curReadIndex];
                     _accelValueHistory[i][_curReadIndex] = _rawAccelValues[i];
                     _runningAccelTotal[i] = _runningAccelTotal[i] + _accelValueHistory[i][_curReadIndex];
