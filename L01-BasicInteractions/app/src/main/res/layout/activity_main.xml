@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="makeabilitylab.l01_basicinteractions.MainActivity">
+
+    <TextView
+        android:id="@+id/textViewHelloWorldMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:textSize="36sp" />
+
+    <TextView
+        android:text="Good Morning!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonToggleHello"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:textSize="36sp"
+        android:id="@+id/textViewGoodMorningMessage" />
+
+    <Button
+        android:text="Reset Color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/buttonResetColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:onClick="onClickResetColor"/>
+
+    <Button
+        android:text="Set Color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSetColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:onClick="onClickSetColor"
+        android:layout_alignBaseline="@+id/buttonResetColor"
+        android:layout_alignBottom="@+id/buttonResetColor"
+        android:layout_toRightOf="@+id/buttonResetColor"
+        android:layout_toEndOf="@+id/buttonResetColor"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp" />
+
+    <TextView
+        android:text="Set Background Color:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:id="@+id/textViewBgColor"
+        android:layout_below="@+id/buttonToggleMorning"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarBgColor"
+        android:max="100"
+        android:progress="1"
+        android:layout_below="@+id/textViewBgColor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonToggleHello"
+        android:textSize="30sp"
+        android:onClick="onClickToggleHelloWorldButton"
+        android:layout_below="@+id/textViewHelloWorldMessage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonToggleMorning"
+        android:textSize="30sp"
+        android:layout_below="@+id/textViewGoodMorningMessage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Test Toast Message:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/textViewToastMessage"
+        android:layout_above="@+id/seekBarTestToastMessages"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarTestToastMessages"
+        android:max="100"
+        android:layout_marginBottom="26dp"
+        android:layout_above="@+id/buttonResetColor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>
