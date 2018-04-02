@@ -12,7 +12,8 @@ import java.util.Random;
 
 /**
  * Shows two basic instances of a real-time graph in GraphView: http://www.android-graphview.org/
- * Adapted from: http://www.android-graphview.org/realtime-chart/
+ * ;
+ *
  *
  * @author jonf
  */
