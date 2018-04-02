@@ -5,6 +5,11 @@ The github repo for CSE590 - Ubiquitous Computing Spring 2018
 The "Hello World" program that we developed in class, which demonstrates how to hook up a button and interact between declarative XML and Java for UI programming.
 TODO: add screenshot
 
+## L01-BasicInteractions
+Demonstrates how to use basic user interface widgets, hook up event listeners, and create alert dialog boxes.
+
+![My image](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/L01-BasicInteractions/L01-BasicInteractions.gif)
+
 ## L01-ReadAndVisAccel
 Demonstrates how to utilize Android's Motion Sensors and how to build a custom View.
 TODO: add animated gif.
