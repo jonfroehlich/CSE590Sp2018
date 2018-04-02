@@ -15,6 +15,6 @@ Demonstrates how to utilize Android's Motion Sensors and how to build a custom V
 TODO: add animated gif.
 
 ## L01-RealtimeGraphViewDemo
-Demonstrates how to visualize real-time data in [Graph View](http://www.android-graphview.org/). To use the Graph View library in your own projects, simply add "compile 'com.jjoe64:graphview:4.2.1'" to your build.gradle file under your app directory and Android Studio takes care of the rest. See the [Getting Started](http://www.android-graphview.org/download-getting-started/) page.
+Demonstrates how to visualize real-time data in [Graph View](http://www.android-graphview.org/). To use the Graph View library in your own projects, simply add "compile 'com.jjoe64:graphview:4.2.1'" to your build.gradle file under your app directory and Android Studio takes care of the rest. See GraphView's [Getting Started](http://www.android-graphview.org/download-getting-started/) page.
 
 ![My image](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/L01-RealtimeGraphViewDemo/L01-RealtimeGraphViewDemo.gif)
