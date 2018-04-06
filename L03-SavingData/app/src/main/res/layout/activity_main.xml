@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save this text to file:"
+             />
+
+        <EditText
+            android:id="@+id/editTextToSaveToFile"
+            android:layout_width="match_parent"
+            android:layout_height="234dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:text="The caged bird sings\nwith a fearful trill\nof things unknown\nbut longed for still\nand his tune is heard\non the distant hill\nfor the caged bird\nsings of freedom."
+             />
+
+        <CheckBox
+            android:id="@+id/checkBoxPromptForFilename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prompt for filename"
+            />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:onClick="onButtonSave"
+            />
+
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+</android.support.constraint.ConstraintLayout>
