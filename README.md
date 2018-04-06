@@ -12,6 +12,7 @@ Demonstrates how to use basic user interface widgets, hook up event listeners, a
 
 ## L01-ReadAndVisAccel
 Demonstrates how to utilize Android's Motion Sensors, how to smooth sensor data using a simple moving average filter, and how to build a custom View.
+
 ![ReadAndVisAccelImage](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/L01-ReadAndVisAccel/L01-ReadAndVisAccel.gif)
 
 
