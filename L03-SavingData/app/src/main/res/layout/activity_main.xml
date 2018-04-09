@@ -26,7 +26,7 @@
             android:layout_height="234dp"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:text="The caged bird sings\nwith a fearful trill\nof things unknown\nbut longed for still\nand his tune is heard\non the distant hill\nfor the caged bird\nsings of freedom."
+            android:text="The caged bird sings\nwith a fearful trill\nof things unknown\nbut longed for still\nand his tune is heard\non the distant hill\nfor the caged bird\nsings of freedom.\n-Maya Angelou"
              />
 
         <CheckBox

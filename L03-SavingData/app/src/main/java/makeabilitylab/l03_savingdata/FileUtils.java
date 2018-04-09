@@ -24,6 +24,22 @@ public final class FileUtils {
     private FileUtils(){}
 
     /**
+     * Based on public static final String[] STANDARD_DIRECTORIES, which is added in later Android APIs
+     */
+    public static final String[] STANDARD_EXTERNAL_ROOT_DIRECTORIES = {
+            Environment.DIRECTORY_MUSIC,
+            Environment.DIRECTORY_PODCASTS,
+            Environment.DIRECTORY_RINGTONES,
+            Environment.DIRECTORY_ALARMS,
+            Environment.DIRECTORY_NOTIFICATIONS,
+            Environment.DIRECTORY_PICTURES,
+            Environment.DIRECTORY_MOVIES,
+            Environment.DIRECTORY_DOWNLOADS,
+            Environment.DIRECTORY_DCIM,
+            Environment.DIRECTORY_DOCUMENTS
+    };
+
+    /**
      * Checks if external storage is available for read and write
      * See: https://developer.android.com/training/data-storage/files.html#WriteExternalStorage
      *

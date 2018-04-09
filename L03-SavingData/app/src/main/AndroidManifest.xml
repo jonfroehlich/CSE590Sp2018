@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="makeabilitylab.l03_savingdata">
 
+    <!-- You must add this line if you want to use writable external storage.
+         See: https://developer.android.com/training/data-storage/files.html#ExternalStoragePermissions -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
