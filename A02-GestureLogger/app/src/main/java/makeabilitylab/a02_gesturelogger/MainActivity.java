@@ -37,16 +37,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager _sensorManager;
     private Sensor _accelSensor;
     private Sensor _gyroSensor;
-
+    
     // Sensor logging stuff
-    private List<SensorEventCache> _sensorEventLog = new ArrayList<>();
-    private float _curAccelValues[] = new float[3];
-    private float _curGyroValues[] = new float[3];
+    private List<SensorEventCache> _accelSensorEventLog = new ArrayList<>();
+    private List<SensorEventCache> _gyroSensorEventLog = new ArrayList<>();
     private String _strSaveDirectory = Environment.DIRECTORY_DOWNLOADS;
 
     // Default gestures to record
     private static final String [] GESTURES = new String[]{
-        "Backhand Tennis", "Forehand Tennis", "Underhand Bowling", "Baseball Throw", "At Rest", "Midair Clockwise 'O'", "Midair Zorro 'Z'", "Your Custom Gesture"
+        "Backhand Tennis", "Forehand Tennis", "Underhand Bowling", "Baseball Throw", "At Rest", "Midair Clockwise 'O'", "Midair Counter Clockwise 'O'", "Midair Zorro 'Z'", "Midair 'S'", "Shake", "Your Custom Gesture"
     };
 
     @Override
@@ -164,12 +163,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void stopRecordingGesture(){
         if(_isRecordingGesture){
-            //TODO: write to file, etc.
+
             File path = Environment.getExternalStoragePublicDirectory(_strSaveDirectory);
             Spinner spinnerGestures = (Spinner)findViewById(R.id.spinnerGestures);
             String strSelectedGesture = spinnerGestures.getSelectedItem().toString();
-            String filename = strSelectedGesture + "_" + System.currentTimeMillis() + ".csv";
-            saveSensorEventCacheToFile(path, filename);
+            strSelectedGesture = strSelectedGesture.replace("'", "");
+
+            long currentTimeMs = System.currentTimeMillis();
+            String accelFilename = strSelectedGesture + "_Accelerometer_" + currentTimeMs + ".csv";
+            saveSensorEventCacheToFile(path, accelFilename, _accelSensorEventLog);
+
+            String gyroFilename = strSelectedGesture + "_Gyroscope_" + currentTimeMs + ".csv";
+            saveSensorEventCacheToFile(path, gyroFilename, _gyroSensorEventLog);
+
+            _accelSensorEventLog.clear();
+            _gyroSensorEventLog.clear();
 
             _isRecordingGesture = false;
             Button buttonStartRecording = (Button)findViewById(R.id.buttonStartRecording);
@@ -184,11 +192,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     }
 
     /**
-     * Saves the current _sensorEventLog to file
+     * Saves the provided sensor event cache to file
      * @param path
      * @param filename
+     * @param listSensorEventCache
      */
-    private void saveSensorEventCacheToFile(File path, String filename){
+    private void saveSensorEventCacheToFile(File path, String filename, List<SensorEventCache> listSensorEventCache){
         boolean wasPathCreated = path.mkdir();
         if(wasPathCreated){
             Log.i("saveToFile", "Created path '" + path.getAbsolutePath());
@@ -214,16 +223,18 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         try {
             fileWriter = new FileWriter(file);
 
-            fileWriter.write(SensorEventCache.getCsvHeaderString());
-            for(SensorEventCache sensorEventCacheItem : _sensorEventLog){
+            int line = 0;
+            for(SensorEventCache sensorEventCacheItem : listSensorEventCache){
+                if(line == 0){
+                    fileWriter.write(sensorEventCacheItem.getCsvHeaderString());
+                }
                 fileWriter.write(sensorEventCacheItem.toCsvString());
+                line++;
             }
 
             fileWriter.close();
-            Toast toast = Toast.makeText(this, "Saved " + _sensorEventLog.size() + " sensor event records to " + file.getAbsolutePath(), Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Saved " + listSensorEventCache.size() + " sensor event records to " + file.getAbsolutePath(), Toast.LENGTH_LONG);
             toast.show();
-            _sensorEventLog.clear();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -231,22 +242,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        long nanoTimestamp = System.nanoTime();
+        // long nanoTimestamp = System.nanoTime();
         long currentTimeMs = System.currentTimeMillis();
 
         switch(sensorEvent.sensor.getType()) {
             case Sensor.TYPE_ACCELEROMETER:
-                System.arraycopy(sensorEvent.values, 0, _curAccelValues, 0, sensorEvent.values.length);
+                if(_isRecordingGesture){
+                    MotionSensorEventCache eventCache = new MotionSensorEventCache(sensorEvent.sensor.getStringType(),
+                            currentTimeMs, sensorEvent.timestamp, sensorEvent.values);
+                    _accelSensorEventLog.add(eventCache);
+                }
                 break;
             case Sensor.TYPE_GYROSCOPE:
-                System.arraycopy(sensorEvent.values, 0, _curGyroValues, 0, sensorEvent.values.length);
+                if(_isRecordingGesture){
+                    MotionSensorEventCache eventCache = new MotionSensorEventCache(sensorEvent.sensor.getStringType(),
+                            currentTimeMs, sensorEvent.timestamp, sensorEvent.values);
+                    _gyroSensorEventLog.add(eventCache);
+                }
                 break;
 
-        }
-
-        if(_isRecordingGesture){
-            SensorEventCache eventCache = new SensorEventCache(sensorEvent.sensor.getStringType(), currentTimeMs, sensorEvent.timestamp, _curAccelValues, _curGyroValues);
-            _sensorEventLog.add(eventCache);
         }
     }
 
