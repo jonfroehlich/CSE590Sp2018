@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager _sensorManager;
     private Sensor _accelSensor;
     private Sensor _gyroSensor;
-    
+
     // Sensor logging stuff
     private List<SensorEventCache> _accelSensorEventLog = new ArrayList<>();
     private List<SensorEventCache> _gyroSensorEventLog = new ArrayList<>();
