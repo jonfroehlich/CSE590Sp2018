@@ -47,4 +47,29 @@ void loop() {
   delay(30);
 }
 
+/*
+ * While correct, the following code is an inferior implementation of the fade program, 
+ * which is why it's commented out. I included it for educational purposes.
+ * 
+ * Can you think of why?
+ * 
+ * Answer: generally, we want to keep the loop() function as fast as possible
+ * as it will increase the perceived responsiveness of our program. While
+ * it doesn't matter in this case--because this code is so simple--generally,
+ * your Arduino code will be performing read operations (e.g., digitalRead, digitalWrite). 
+ * If you're stuck in these long 'for loops' with lots of delays, you are going to
+ * negatively impact your sampling rate of your read calls. 
+ */
+//void loop(){
+//  for(int i = 0; i <= _maxBrightness; i += _fadeAmount){
+//    analogWrite(LED_OUTPUT_PIN, i);
+//    delay(30);
+//  }
+//
+//  for(int i = _maxBrightness; i >= 0; i -= _fadeAmount){
+//    analogWrite(LED_OUTPUT_PIN, i);
+//    delay(30);
+//  }
+//}
+
 
