@@ -4,7 +4,7 @@
  * The analogWrite() function uses PWM, so if you want to change the pin you're
  * using, be sure to use another PWM capable pin. On the Arduino Uno, the PWM pins
  * are identified with a "~" sign, like ~3, ~5, ~6, ~9, ~10 and ~11. On the RedBear
- * Duo, please consult the pin layout data sheet provided in class.
+ * Duo, please consult the pin layout data sheet provided in class or the lecture slides.
  * 
  * By Jon Froehlich for CSE590
  * http://makeabilitylab.io
