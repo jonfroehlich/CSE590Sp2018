@@ -32,7 +32,7 @@ void setup() {
 
 void loop() {
   
-  // set the brightness of pin 9:
+  // set the brightness of pin D0:
   analogWrite(LED_OUTPUT_PIN, _brightness);
 
   // change the brightness for next time through the loop:

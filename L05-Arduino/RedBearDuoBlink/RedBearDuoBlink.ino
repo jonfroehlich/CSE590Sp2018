@@ -37,5 +37,3 @@ void loop() {
   // Wait another second
   delay(1000);
 }
-
-
