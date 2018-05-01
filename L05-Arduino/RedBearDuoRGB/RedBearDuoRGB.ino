@@ -21,7 +21,7 @@ SYSTEM_MODE(MANUAL);
 const int RGB_RED_PIN = D0;
 const int RGB_GREEN_PIN  = D1;
 const int RGB_BLUE_PIN  = D2;
-const int DELAY = 1000; // delay between changing colors
+const int DELAY = 500; // delay between changing colors
 
 void setup() {
   pinMode(RGB_RED_PIN, OUTPUT);
@@ -56,6 +56,10 @@ void loop() {
 
   Serial.println("Color=Aqua");
   setColor(0, 255, 255);  // aqua
+  delay(DELAY);
+
+  Serial.println("Color=White");
+  setColor(255, 255, 255);  // aqua
   delay(DELAY);
 }
 

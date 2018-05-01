@@ -6,7 +6,7 @@
  * using, be sure to use another PWM capable pin. On the Arduino Uno, the PWM pins
  * are identified with a "~" sign, like ~3, ~5, ~6, ~9, ~10 and ~11. On the RedBear
  * Duo, please consult the pin layout data sheet provided in class or the lecture slides.
- * 
+ *
  * By Jon Froehlich for CSE590
  * http://makeabilitylab.io
  */
@@ -26,6 +26,7 @@ const int POT_INPUT_PIN = A0;
 void setup() {
   pinMode(LED_OUTPUT_PIN, OUTPUT);
   pinMode(POT_INPUT_PIN, INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -38,8 +39,13 @@ void loop() {
   // Uno, the analogRead ranges from 0 to 1023 (2^10 or 10 bits). Regardless,
   // we need to remap this value linearly from the large range (0-4092) to
   // the smaller range (0-255) since the analogWrite function can only write out
-  // 0-255 (a byte--2^8). 
+  // 0-255 (a byte--2^8).  
   int ledVal = map(potVal, 0, 4092, 0, 255);
+
+  // print the raw pot value and the converted led value
+  Serial.print(potVal);
+  Serial.print(",");
+  Serial.println(ledVal);
 
   // write out the LED value. This value is translated to voltage by: 
   // voltageVal = max_voltage * val/255 or voltageVal = 3.3V * val/255 in 
