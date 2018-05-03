@@ -1,5 +1,5 @@
 /*
- * This example reads in a button input on D8 (with an external pull-down resistor configuration)
+ * This example reads in a button input on D8 (with an internal pull-down resistor configuration)
  * and turns on/off an LED on D0 accordingly
  * 
  * By Jon Froehlich for CSE590
@@ -20,12 +20,12 @@ const int BUTTON_INPUT_PIN = D8;
 
 void setup() {
   pinMode(LED_OUTPUT_PIN, OUTPUT);
-  pinMode(BUTTON_INPUT_PIN, INPUT);
+  pinMode(BUTTON_INPUT_PIN, INPUT_PULLDOWN); // use the RedBear Duo internal pull-down resistor
 }
 
 void loop() {
 
-  // read the button value. It will be HIGH when pressed and
+  // Read the button value. It will be HIGH when pressed and
   // LOW when not pressed
   int buttonVal = digitalRead(BUTTON_INPUT_PIN);
 

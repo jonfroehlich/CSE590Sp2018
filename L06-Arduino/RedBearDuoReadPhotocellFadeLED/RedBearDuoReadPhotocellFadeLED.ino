@@ -32,7 +32,7 @@ void setup() {
 
 void loop() {
 
-  // Read the potentiometer value
+  // Read the photo-sensitive resistor value
   int photocellVal = analogRead(PHOTOCELL_INPUT_PIN);
 
   // Remap the value for output. 
