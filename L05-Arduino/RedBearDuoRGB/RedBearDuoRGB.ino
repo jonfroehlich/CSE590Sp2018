@@ -59,7 +59,7 @@ void loop() {
   delay(DELAY);
 
   Serial.println("Color=White");
-  setColor(255, 255, 255);  // aqua
+  setColor(255, 255, 255);  // white
   delay(DELAY);
 }
 
