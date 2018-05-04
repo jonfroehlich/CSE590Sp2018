@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lianghe.InClass_EXE1">
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="18" />
+
+    <!-- Declare the Bluetooth permissions in the manifest. Learn more about Bluetooth on Android
+     development: https://developer.android.com/guide/topics/connectivity/bluetooth-->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="InClass EXE1 - LED Control"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.lianghe.InClass_EXE1.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Declare the service that we want to use in our application in the manifest. Learn more
+        about Service in Android development: https://developer.android.com/guide/components/services-->
+        <service
+            android:name="com.example.lianghe.InClass_EXE1.BLE.RBLService"
+            android:enabled="true" />
+    </application>
+
+</manifest>
