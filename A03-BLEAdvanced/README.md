@@ -1,5 +1,7 @@
 AdvancedBLE is a more sophisticated version of [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) that demonstrates two-way communicaiton between Anrdoid and the RedBear Duo. We recommend starting with [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) first and then playing with AdvancedBLE.
 
+[![BLEAdvanced Demo](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/A03-BLEAdvanced/YouTubeDemoScreenshot.png)](https://youtu.be/FX6jjLPIqnI "BLEAdvanced Demo")
+
 # Arduino Sketch
 1. The basic configuration is set up ble_config.h and ble_config.cpp.
 2. In the Arduino sketch, you need to define a name for your Duo board in the variable BLE_SHORT_NAME so that your Android app could find your board. The length of the name should not be longer than 8 chars.
