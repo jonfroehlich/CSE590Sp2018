@@ -28,7 +28,7 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
  * TODO: change the pins here for your applications
  */
 #define DIGITAL_OUT_PIN            D2
-#define DIGITAL_IN_PIN             A4
+#define DIGITAL_IN_PIN             D12
 #define PWM_PIN                    D3
 #define SERVO_PIN                  D4
 #define ANALOG_IN_PIN              A5
