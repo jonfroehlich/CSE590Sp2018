@@ -17,7 +17,7 @@ Besides the device name, you need to explicitly define the length of the device 
 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 <uses-feature android:name="android.hardware.bluetooth_le"  android:required="true" />
 ```
-3. Also add the markup `<service> under <application>` (this is important because otherwise we cannot use RBLService):
+3. Also add the markup `<service>` under `<application>` (this is important because otherwise we cannot use RBLService):
 ```
 <service android:name=".RBLService" android:enabled="true" />
 ```
