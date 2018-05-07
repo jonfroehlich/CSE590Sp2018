@@ -1,4 +1,4 @@
-BasicBLE is a simplification of AdvancedBLE and demonstrates one-way communication from an Android app to the RedBear Duo. After getting BasicBLE to work, then try AdvancedBLE would illustrates two-way communication between Android <-> the RedBear Duo.
+BasicBLE is a simplification of [AdvancedBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEAdvanced) and demonstrates one-way communication from an Android app to the RedBear Duo. After getting BasicBLE to work, then try [AdvancedBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEAdvanced) would illustrates two-way communication between Android <-> the RedBear Duo.
 
 # Arduino Sketch
 1. The basic configuration is set up ble_config.h and ble_config.cpp.
