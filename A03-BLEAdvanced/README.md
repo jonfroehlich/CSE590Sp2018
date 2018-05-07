@@ -1,4 +1,4 @@
-AdvancedBLE is a more sophisticated version of [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) that demonstrates two-way communicaiton between Anrdoid and the RedBear Duo. We recommend starting with [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) first and then playing with AdvancedBLE.
+AdvancedBLE is a more sophisticated version of [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) that demonstrates two-way communication between Android and the RedBear Duo. We recommend starting with [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) first and then playing with AdvancedBLE.
 
 [![BLEAdvanced Demo](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/A03-BLEAdvanced/YouTubeDemoScreenshot.png)](https://youtu.be/FX6jjLPIqnI "BLEAdvanced Demo")
 
