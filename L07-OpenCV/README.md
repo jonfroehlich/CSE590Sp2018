@@ -1,5 +1,5 @@
 # Setting Up OpenCV in Android Studio
-Notes on starting an Android OpenCV project.
+Notes on starting an Android OpenCV project in Android Studio.
 
 1. Download the [OpenCV for Android library from SourceForge](https://sourceforge.net/projects/opencvlibrary/files/opencv-android/). Similar to Python, the OpenCV team maintains both a version 2 (2.4.13) and a version 3 of the library (currently 3.4.1). We are using [3.4.1](https://sourceforge.net/projects/opencvlibrary/files/opencv-android/3.4.1/) in our course. 
 
