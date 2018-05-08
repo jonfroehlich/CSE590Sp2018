@@ -13,9 +13,11 @@ Notes on starting an Android OpenCV project in Android Studio.
 
 6. On the left sidebar (Project), select Grade Scripts -> build.gradle (Module: openCVLibrary341). Note: do not select the build.gradle for Module: app. Switch the minSdkVersion to 21 and the compileSdkVersion to 21. Android Studio should show the yellow pop-up at the top of the build.gradle file that says "Gradle files have change since last sync. A project sync may be necessary for the IDE to work properly. Sync Now." Click on "Sync Now."
 
-7. Now, Gradle should auto-build again and, as before, complete successfully. Once again, select Build -> Make Project. This time, the build should work. Woohoo!
+7. Now, Gradle should auto-build again and, as before, complete successfully. Once again, select Build -> Make Project. This time, the build should work. Woohoo! But we're not done yet...
 
-8. Now you can start using and building apps with the OpenCV Android library! For a simple example based on the [Hello OpenCV Sample](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample), see OpenCVTest.
+8. We have to add openCVLibrary341 as a dependency to our app. On the left sidebar (Project), right-click on "app" and select "Open Module Settings." Make sure "app" is selected under modules and click on Dependencies. In the Dependencies view, click on the "+" sign and you'll be presented with three options: Library Dependency, Jar Dependency, and Module Dependency. Select "Module Dependency" and a pop-up Dialog should appear with the title "Choose Modules." Select openCVLibrary341. Click OK. Gradle will sync again and hopefully complete successfully.
+
+9. Now you can start using and building apps with the OpenCV Android library! For a simple example based on the [Hello OpenCV Sample](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample), see OpenCVTest.
 
 ## Resources
 A few resources I found and used when attempting to setup Android Studio for OpenCV development.
