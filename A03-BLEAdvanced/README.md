@@ -21,5 +21,10 @@ Besides the device name, you need to explicitly define the length of the device 
 ```
 <service android:name=".RBLService" android:enabled="true" />
 ```
-4. In MainActivity, change mTargetDeviceName and mNameLen to the device name and the length defined in the Arduino code, so that your Android app could scan and find your Duo board.
-5. It might take a minute or two to scan all available BLE-enabled devices and connect the paired Duo board the first time after you upload the sketch to the board and launch the Android app. 
+4. Currently the Android program works with targetSdkVersion 19. If the targetSdkVersion is 21 or above, add location permissions in the app manifest:
+```
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+```
+5. In MainActivity, change mTargetDeviceName and mNameLen to the device name and the length defined in the Arduino code, so that your Android app could scan and find your Duo board.
+6. It might take a minute or two to scan all available BLE-enabled devices and connect the paired Duo board the first time after you upload the sketch to the board and launch the Android app. 
