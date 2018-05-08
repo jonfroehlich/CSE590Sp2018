@@ -13,8 +13,6 @@
  *  - https://learn.adafruit.com/adafruit-arduino-lesson-14-servo-motors
  */
 
-//https://www.adafruit.com/product/169
-
 /* 
  * IMPORTANT: When working with the RedBear Duo, you must have this line of
  * code at the top of your program. The default state is SYSTEM_MODE(AUTOMATIC);
