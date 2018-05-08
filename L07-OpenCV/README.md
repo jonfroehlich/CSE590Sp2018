@@ -19,6 +19,8 @@ Notes on starting an Android OpenCV project in Android Studio.
 
 9. Now you can start using and building apps with the OpenCV Android library! For a simple example based on the [Hello OpenCV Sample](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample), see OpenCVTest.
 
+10. When opening OpenCV-based Android apps, you may be greeted by an "Android Gradle Plugin Update Recommended" pop-up dialog with three options: "Update", "Remind me tomorrow", "Don't remind me again for this project." Select the latter. Do not update!
+
 # Building a Basic App
 Some things you must do:
 * In AndroidManifest.xml, add the following just after `</application>`:
