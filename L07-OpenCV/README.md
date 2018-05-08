@@ -1,6 +1,7 @@
+# Setting Up OpenCV in Android Studio
 Notes on starting an Android OpenCV project.
 
-1. Download the (OpenCV for Android library from SourceForge)[https://sourceforge.net/projects/opencvlibrary/files/opencv-android/]. Similar to Python, the OpenCV team maintains both a version 2 (2.4.13) and a version 3 of the library (currently 3.4.1). We are using [3.4.1](https://sourceforge.net/projects/opencvlibrary/files/opencv-android/3.4.1/) in our course. 
+1. Download the [OpenCV for Android library from SourceForge](https://sourceforge.net/projects/opencvlibrary/files/opencv-android/). Similar to Python, the OpenCV team maintains both a version 2 (2.4.13) and a version 3 of the library (currently 3.4.1). We are using [3.4.1](https://sourceforge.net/projects/opencvlibrary/files/opencv-android/3.4.1/) in our course. 
 
 2. Unzip the OpenCV library in a directory of your choice. I put mine in \CSE590\libs\OpenCV-3.4.1-android-sdk. Within this folder, there should be three sub-folders: apk, samples, and sdk.
 
@@ -16,8 +17,7 @@ Notes on starting an Android OpenCV project.
 
 8. Now you can start using and building apps with the OpenCV Android library! For a simple example based on the [Hello OpenCV Sample](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample), see OpenCVTest.
 
-##Resources
+## Resources
 A few resources I found and used when attempting to setup Android Studio for OpenCV development.
-
-[Building first Android OpenCV application](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample)
-[Setting up Android Studio for OpenCV development](https://medium.com/@sukritipaul005/a-beginners-guide-to-installing-opencv-android-in-android-studio-ea46a7b4f2d3)
+* [Building first Android OpenCV application](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample)
+* [Setting up Android Studio for OpenCV development](https://medium.com/@sukritipaul005/a-beginners-guide-to-installing-opencv-android-in-android-studio-ea46a7b4f2d3)
