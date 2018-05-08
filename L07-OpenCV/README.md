@@ -19,7 +19,39 @@ Notes on starting an Android OpenCV project in Android Studio.
 
 9. Now you can start using and building apps with the OpenCV Android library! For a simple example based on the [Hello OpenCV Sample](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample), see OpenCVTest.
 
+# Building a Basic App
+Some things you must do:
+* In AndroidManifest.xml, add the following just after `</application>`:
+```
+<uses-permission android:name="android.permission.CAMERA"/>
+
+<uses-feature android:name="android.hardware.camera" android:required="false"/>
+<uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+<uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+<uses-feature android:name="android.hardware.camera.front.autofocus" android:required="false"/>
+```
+* For API 23+, you must also get the user's permission at runtime in addition to the manifest permission settings. Add this code and call it from onCreate in your MainActivity class
+```
+  public static void verifyAndAskForExternalStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+
+            // We don't have permission so prompt the user
+            // For API 23+ you need to request camera permissions even if they are already in your manifest.
+            // See: http://developer.android.com/training/permissions/requesting.html
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.CAMERA},
+                    1);
+
+        }
+    }
+ ```
+
 ## Resources
 A few resources I found and used when attempting to setup Android Studio for OpenCV development.
 * [Building first Android OpenCV application](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample)
 * [Setting up Android Studio for OpenCV development](https://medium.com/@sukritipaul005/a-beginners-guide-to-installing-opencv-android-in-android-studio-ea46a7b4f2d3)
+* [OpenCV for Tegra](https://docs.nvidia.com/gameworks/content/technologies/mobile/opencv_main.htm?tocpath=Technologies%7CMobile%20Technologies%7COpenCV%20for%20Tegra%7C_____0)
+
