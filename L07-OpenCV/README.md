@@ -59,7 +59,9 @@ Some things you must do:
  ```
 
 # Problems
-* Can't get Canny edge detector to work. Received the following error:
+
+## Canny Edge Detector Throws Exception
+Can't get Canny edge detector to work. Received the following error:
 ```
 E/art: No implementation found for void org.opencv.imgproc.Imgproc.Canny_3(long, long, double, double) (tried Java_org_opencv_imgproc_Imgproc_Canny_13 and Java_org_opencv_imgproc_Imgproc_Canny_13__JJDD)
 E/AndroidRuntime: FATAL EXCEPTION: Thread-7
