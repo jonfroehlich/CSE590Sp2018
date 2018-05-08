@@ -5,6 +5,7 @@
  * This code shows that the user can send simple digital write data from the
  * Android app to the Duo board.
  * Created by Liang He, April 27th, 2018
+ * Updated by Jon Froehlich, May 8, 2018
  * 
  * The Library is created based on Bjorn's code for RedBear BLE communication: 
  * https://github.com/bjo3rn/idd-examples/tree/master/redbearduo/examples/ble_led
@@ -18,13 +19,20 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 #endif
 
 #define RECEIVE_MAX_LEN    3
-#define BLE_SHORT_NAME_LEN 0x08 // must be in the range of [0x01, 0x09]
-#define BLE_SHORT_NAME 'B','L','E','D','e','m','o'  // define each char but the number of char should be BLE_SHORT_NAME_LEN-1
+
+// Must be an integer between 1 and 9 and and must also be set to len(BLE_SHORT_NAME) + 1
+#define BLE_SHORT_NAME_LEN 8 
+
+// The number of chars should be BLE_SHORT_NAME_LEN - 1. So, for example, if your BLE_SHORT_NAME was 'J', 'o', 'n'
+// then BLE_SHORT_NAME_LEN should be 4. If 'M','a','k','e','L','a','b' then BLE_SHORT_NAME_LEN should be 8
+// TODO: you must change this name. Otherwise, you will not be able to differentiate your RedBear Duo BLE
+// device from everyone else's device in class.
+#define BLE_SHORT_NAME 'M','a','k','e','L','a','b'  
 
 /* Define the pins on the Duo board
- * TODO: change the pins here for your applications
+ * TODO: change the pins here for your applications (as necessary)
  */
-#define DIGITAL_OUT_PIN            D2
+#define DIGITAL_OUT_PIN            D0
 
 
 // UUID is used to find the device by other BLE-abled devices
@@ -46,13 +54,12 @@ static uint8_t adv_data[] = {
   0x1e,0x94,0x8d,0xf1,0x48,0x31,0x94,0xba,0x75,0x4c,0x3e,0x50,0x00,0x00,0x3d,0x71 
 };
 
-// Define the receive and send handlers
+// Define the receive handlers
 static uint16_t receive_handle = 0x0000; // recieve
-
 static uint8_t receive_data[RECEIVE_MAX_LEN] = { 0x01 };
 
 /**
- * @brief Callback for writing event.
+ * @brief Callback for receiving data from Android (or whatever device you're connected to).
  *
  * @param[in]  value_handle  
  * @param[in]  *buffer       The buffer pointer of writting data.
@@ -98,6 +105,7 @@ void setup() {
   // Initialize ble_stack.
   ble.init();
   configureBLE(); //lots of standard initialization hidden in here - see ble_config.cpp
+  
   // Set BLE advertising data
   ble.setAdvertisementData(sizeof(adv_data), adv_data);
 
@@ -118,4 +126,7 @@ void setup() {
   pinMode(DIGITAL_OUT_PIN, OUTPUT);
 }
 
-void loop() {}
+void loop() 
+{
+  // Not currently used. The "meat" of the program is in the callback bleWriteCallback
+}

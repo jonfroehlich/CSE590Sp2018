@@ -6,6 +6,7 @@
  * the paired Android app. The user can use the Android app to 
  * do digital read & write, analog read & write, and servo control.
  * Created by Liang He, April 27th, 2018
+ * Updated by Jon Froehlich, May 8, 2018
  * 
  * The Library is created based on Bjorn's code for RedBear BLE communication: 
  * https://github.com/bjo3rn/idd-examples/tree/master/redbearduo/examples/ble_led
@@ -20,12 +21,18 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 
 #define RECEIVE_MAX_LEN    3
 #define SEND_MAX_LEN    3
-#define BLE_SHORT_NAME_LEN 0x08 // must be in the range of [0x01, 0x09]
-#define BLE_SHORT_NAME 'B','L','E','D','e','m','o'  // define each char but the number of char should be BLE_SHORT_NAME_LEN-1
 
+// Must be an integer between 1 and 9 and and must also be set to len(BLE_SHORT_NAME) + 1
+#define BLE_SHORT_NAME_LEN 8 
+
+// The number of chars should be BLE_SHORT_NAME_LEN - 1. So, for example, if your BLE_SHORT_NAME was 'J', 'o', 'n'
+// then BLE_SHORT_NAME_LEN should be 4. If 'M','a','k','e','L','a','b' then BLE_SHORT_NAME_LEN should be 8
+// TODO: you must change this name. Otherwise, you will not be able to differentiate your RedBear Duo BLE
+// device from everyone else's device in class.
+#define BLE_SHORT_NAME 'M','a','k','e','L','a','b'  
 
 /* Define the pins on the Duo board
- * TODO: change the pins here for your applications
+ * TODO: change and add/subtract the pins here for your applications (as necessary)
  */
 #define DIGITAL_OUT_PIN            D2
 #define DIGITAL_IN_PIN             D12
@@ -73,7 +80,7 @@ static byte old_state = LOW;
 
 
 /**
- * @brief Callback for writing event.
+ * @brief Callback for receiving data from Android (or whatever device you're connected to).
  *
  * @param[in]  value_handle  
  * @param[in]  *buffer       The buffer pointer of writting data.
@@ -146,6 +153,7 @@ static void  send_notify(btstack_timer_source_t *ts) {
     if (ble.attServerCanSendPacket())
       ble.sendNotify(send_handle, send_data, SEND_MAX_LEN);
   }
+  
   // If digital in changes, report the state.
   if (digitalRead(DIGITAL_IN_PIN) != old_state) {
     Serial.println("send_notify digital reading ");
@@ -197,16 +205,22 @@ void setup() {
   pinMode(DIGITAL_OUT_PIN, OUTPUT);
   pinMode(DIGITAL_IN_PIN, INPUT_PULLUP);
   pinMode(PWM_PIN, OUTPUT);
-  // Default to internally pull high, change it if you need
+  
+  // Default to write a high value, change it if you need
   digitalWrite(DIGITAL_IN_PIN, HIGH);
+  
   // Initial the servo as always with Arduino board
   myservo.attach(SERVO_PIN);
   myservo.write(0);
 
-  // Start a task to check status.
+  // Start a task to check status of the pins on your RedBear Duo
+  // Works by polling every X milliseconds where X is currently 500
   send_characteristic.process = &send_notify;
-  ble.setTimer(&send_characteristic, 500);//2000ms
+  ble.setTimer(&send_characteristic, 500); //500ms
   ble.addTimer(&send_characteristic);
 }
 
-void loop() {}
+void loop() 
+{
+  // Not currently used. The "meat" of the program is in the callback bleWriteCallback and send_notify
+}
