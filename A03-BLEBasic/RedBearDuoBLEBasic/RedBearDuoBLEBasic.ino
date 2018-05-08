@@ -57,6 +57,42 @@ static uint8_t adv_data[] = {
 // Define the receive handlers
 static uint16_t receive_handle = 0x0000; // recieve
 static uint8_t receive_data[RECEIVE_MAX_LEN] = { 0x01 };
+int bleWriteCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size); // function declaration for callback function
+
+void setup() {
+  Serial.begin(115200); //TODO: @Liang, why 115,200? Does this set the comm rate between Android and the RedBear Duo?
+  delay(5000); //TODO: @Liang, is such a high delay necessary? If so, why?
+  
+  Serial.println("Simple Digital Out Demo.");
+
+  // Initialize ble_stack.
+  ble.init();
+  configureBLE(); //lots of standard initialization hidden in here - see ble_config.cpp
+  
+  // Set BLE advertising data
+  ble.setAdvertisementData(sizeof(adv_data), adv_data);
+
+  // Register BLE callback functions
+  ble.onDataWriteCallback(bleWriteCallback);
+
+  // Add user defined service and characteristics
+  ble.addService(service1_uuid);
+  receive_handle = ble.addCharacteristicDynamic(service1_tx_uuid, ATT_PROPERTY_NOTIFY|ATT_PROPERTY_WRITE|ATT_PROPERTY_WRITE_WITHOUT_RESPONSE, receive_data, RECEIVE_MAX_LEN);
+  
+  // BLE peripheral starts advertising now.
+  ble.startAdvertising();
+  Serial.println("BLE start advertising.");
+
+  /*
+   * TODO: This is where you can initialize all peripheral/pin modes
+   */
+  pinMode(DIGITAL_OUT_PIN, OUTPUT);
+}
+
+void loop() 
+{
+  // Not currently used. The "meat" of the program is in the callback bleWriteCallback
+}
 
 /**
  * @brief Callback for receiving data from Android (or whatever device you're connected to).
@@ -95,38 +131,4 @@ int bleWriteCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size) {
     }
   }
   return 0;
-}
-
-void setup() {
-  Serial.begin(115200);
-  delay(5000);
-  Serial.println("Simple Digital Out Demo.");
-
-  // Initialize ble_stack.
-  ble.init();
-  configureBLE(); //lots of standard initialization hidden in here - see ble_config.cpp
-  
-  // Set BLE advertising data
-  ble.setAdvertisementData(sizeof(adv_data), adv_data);
-
-  // Register BLE callback functions
-  ble.onDataWriteCallback(bleWriteCallback);
-
-  // Add user defined service and characteristics
-  ble.addService(service1_uuid);
-  receive_handle = ble.addCharacteristicDynamic(service1_tx_uuid, ATT_PROPERTY_NOTIFY|ATT_PROPERTY_WRITE|ATT_PROPERTY_WRITE_WITHOUT_RESPONSE, receive_data, RECEIVE_MAX_LEN);
-  
-  // BLE peripheral starts advertising now.
-  ble.startAdvertising();
-  Serial.println("BLE start advertising.");
-
-  /*
-   * TODO: This is where you can initialize all peripheral/pin modes
-   */
-  pinMode(DIGITAL_OUT_PIN, OUTPUT);
-}
-
-void loop() 
-{
-  // Not currently used. The "meat" of the program is in the callback bleWriteCallback
 }
