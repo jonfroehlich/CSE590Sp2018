@@ -48,8 +48,23 @@ Some things you must do:
         }
     }
  ```
+# Problems
+* Can't get Canny edge detector to work. Received the following error:
+```
+E/art: No implementation found for void org.opencv.imgproc.Imgproc.Canny_3(long, long, double, double) (tried Java_org_opencv_imgproc_Imgproc_Canny_13 and Java_org_opencv_imgproc_Imgproc_Canny_13__JJDD)
+E/AndroidRuntime: FATAL EXCEPTION: Thread-7
+                  Process: io.makeabilitylab.opencvimageprocessing, PID: 14758
+                  java.lang.UnsatisfiedLinkError: No implementation found for void org.opencv.imgproc.Imgproc.Canny_3(long, long, double, double) (tried Java_org_opencv_imgproc_Imgproc_Canny_13 and Java_org_opencv_imgproc_Imgproc_Canny_13__JJDD)
+                      at org.opencv.imgproc.Imgproc.Canny_3(Native Method)
+                      at org.opencv.imgproc.Imgproc.Canny(Imgproc.java:1128)
+                      at io.makeabilitylab.opencvimageprocessing.MainActivity.onCameraFrame(MainActivity.java:151)
+                      at org.opencv.android.CameraBridgeViewBase.deliverAndDrawFrame(CameraBridgeViewBase.java:392)
+                      at org.opencv.android.JavaCameraView$CameraWorker.run(JavaCameraView.java:373)
+                      at java.lang.Thread.run(Thread.java:776)
+```
+From Googling, I found that perhaps the OpenCV Manager on the Play Store is outdated (see [link](https://github.com/opencv/opencv/issues/9497#issuecomment-340000573)).
 
-## Resources
+# Resources
 A few resources I found and used when attempting to setup Android Studio for OpenCV development.
 * [Building first Android OpenCV application](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample)
 * [Setting up Android Studio for OpenCV development](https://medium.com/@sukritipaul005/a-beginners-guide-to-installing-opencv-android-in-android-studio-ea46a7b4f2d3)
