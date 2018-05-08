@@ -42,10 +42,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
-    // Define the device name and the length of the name
+    // TODO: Define your device name and the length of the name. For your assignment, do not use the
+    // default name or you will not be able to discriminate your board from everyone else's board.
     // Note the device name and the length should be consistent with the ones defined in the Duo sketch
-    private String mTargetDeviceName = "BLEDemo";
-    private int mNameLen = 0x08;
+    private final String mTargetDeviceName = "MakeLab";
+    private int mNameLen = mTargetDeviceName.length() + 1; // must be len(mTargetDeviceName) + 1
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
@@ -314,6 +315,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
+                //TODO: Ideally we would present the user with a "wait" message until
+                //a connection was made or a timeout occurred... but this is better than nothing for now
+                Toast toast = Toast.makeText(
+                                MainActivity.this,
+                                "Attempting to connect to '" + mTargetDeviceName + "'",
+                                Toast.LENGTH_LONG);
+                toast.show();
+
                 if (mScanFlag == false) {
                     // Scan all available devices through BLE
                     scanLeDevice();
@@ -333,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                                         Toast toast = Toast
                                                 .makeText(
                                                         MainActivity.this,
-                                                        "Couldn't search Ble Shiled device!",
+                                                        "Couldn't find the BLE device with name '" + mTargetDeviceName + "'!",
                                                         Toast.LENGTH_SHORT);
                                         toast.setGravity(0, 0, Gravity.CENTER);
                                         toast.show();
@@ -344,7 +354,7 @@ public class MainActivity extends AppCompatActivity {
                     }, SCAN_PERIOD);
                 }
 
-                System.out.println(mConnState);
+                System.out.println("The connection state is: " + mConnState);
                 if (mConnState == false) {
                     mBluetoothLeService.connect(mDeviceAddress);
                 } else {

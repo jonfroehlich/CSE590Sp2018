@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     // TODO: Define your device name and the length of the name. For your assignment, do not use the
     // default name or you will not be able to discriminate your board from everyone else's board.
     // Note the device name and the length should be consistent with the ones defined in the Duo sketch
-    private String mTargetDeviceName = "MakeLab";
-    private int mNameLen = 0x08; // must be len(mTargetDeviceName) + 1
+    private final String mTargetDeviceName = "MakeLab";
+    private int mNameLen = mTargetDeviceName.length() + 1; // must be len(mTargetDeviceName) + 1
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                                         Toast toast = Toast
                                                 .makeText(
                                                         MainActivity.this,
-                                                        "Couldn't find the BLE device!",
+                                                        "Couldn't find the BLE device with name '{}'!".format(mTargetDeviceName),
                                                         Toast.LENGTH_SHORT);
                                         toast.setGravity(0, 0, Gravity.CENTER);
                                         toast.show();

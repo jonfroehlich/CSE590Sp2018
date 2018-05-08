@@ -57,7 +57,7 @@ static uint8_t adv_data[] = {
 // Define the receive handlers
 static uint16_t receive_handle = 0x0000; // recieve
 static uint8_t receive_data[RECEIVE_MAX_LEN] = { 0x01 };
-int bleWriteCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size); // function declaration for callback function
+int bleReceiveDataCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size); // function declaration for callback function
 
 void setup() {
   Serial.begin(115200); //TODO: @Liang, why 115,200? Does this set the comm rate between Android and the RedBear Duo?
@@ -73,7 +73,7 @@ void setup() {
   ble.setAdvertisementData(sizeof(adv_data), adv_data);
 
   // Register BLE callback functions
-  ble.onDataWriteCallback(bleWriteCallback);
+  ble.onDataWriteCallback(bleReceiveDataCallback);
 
   // Add user defined service and characteristics
   ble.addService(service1_uuid);
@@ -103,7 +103,7 @@ void loop()
  *
  * @retval 
  */
-int bleWriteCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size) {
+int bleReceiveDataCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size) {
   Serial.print("Write value handler: ");
   Serial.println(value_handle, HEX);
 

@@ -34,7 +34,7 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 /* Define the pins on the Duo board
  * TODO: change and add/subtract the pins here for your applications (as necessary)
  */
-#define DIGITAL_OUT_PIN            D2
+#define DIGITAL_OUT_PIN            D0
 #define DIGITAL_IN_PIN             D12
 #define PWM_PIN                    D3
 #define SERVO_PIN                  D4
@@ -53,6 +53,7 @@ static uint16_t receive_handle = 0x0000; // recieve
 static uint16_t send_handle = 0x0000; // send
 
 static uint8_t receive_data[RECEIVE_MAX_LEN] = { 0x01 };
+int bleReceiveDataCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size); // function declaration for receiving data callback
 static uint8_t send_data[SEND_MAX_LEN] = { 0x00 };
 
 // Define the configuration data
@@ -71,6 +72,7 @@ static uint8_t adv_data[] = {
 };
 
 static btstack_timer_source_t send_characteristic;
+static void bleSendDataTimerCallback(btstack_timer_source_t *ts); // function declaration for sending data callback
 
 // Mark whether need to notify analog value to client.
 static boolean analog_enabled = false;
@@ -78,6 +80,51 @@ static boolean analog_enabled = false;
 // Input pin state.
 static byte old_state = LOW;
 
+void setup() {
+  Serial.begin(115200);
+  delay(5000);
+  Serial.println("Simple Controls demo.");
+
+  // Initialize ble_stack.
+  ble.init();
+  configureBLE(); //lots of standard initialization hidden in here - see ble_config.cpp
+  // Set BLE advertising data
+  ble.setAdvertisementData(sizeof(adv_data), adv_data);
+  
+  // Register BLE callback functions
+  ble.onDataWriteCallback(bleReceiveDataCallback);
+
+  // Add user defined service and characteristics
+  ble.addService(service1_uuid);
+  receive_handle = ble.addCharacteristicDynamic(service1_tx_uuid, ATT_PROPERTY_NOTIFY|ATT_PROPERTY_WRITE|ATT_PROPERTY_WRITE_WITHOUT_RESPONSE, receive_data, RECEIVE_MAX_LEN);
+  send_handle = ble.addCharacteristicDynamic(service1_rx_uuid, ATT_PROPERTY_NOTIFY, send_data, SEND_MAX_LEN);
+
+  // BLE peripheral starts advertising now.
+  ble.startAdvertising();
+  Serial.println("BLE start advertising.");
+
+  /*
+   * TODO: This is where you can initialize all peripheral/pin modes
+   */
+  pinMode(DIGITAL_OUT_PIN, OUTPUT);
+  pinMode(DIGITAL_IN_PIN, INPUT_PULLDOWN);
+  pinMode(PWM_PIN, OUTPUT);
+  
+  // Initial the servo as always with Arduino board
+  myservo.attach(SERVO_PIN);
+  myservo.write(0);
+
+  // Start a task to check status of the pins on your RedBear Duo
+  // Works by polling every X milliseconds where X is currently 500
+  send_characteristic.process = &bleSendDataTimerCallback;
+  ble.setTimer(&send_characteristic, 500); //500ms
+  ble.addTimer(&send_characteristic);
+}
+
+void loop() 
+{
+  // Not currently used. The "meat" of the program is in the callback bleWriteCallback and send_notify
+}
 
 /**
  * @brief Callback for receiving data from Android (or whatever device you're connected to).
@@ -88,7 +135,7 @@ static byte old_state = LOW;
  *
  * @retval 
  */
-int bleWriteCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size) {
+int bleReceiveDataCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size) {
   Serial.print("Write value handler: ");
   Serial.println(value_handle, HEX);
 
@@ -142,7 +189,7 @@ int bleWriteCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size) {
  * TODO: Send the data from either analog read or digital read back to 
  * the other BLE-abled devices
  */
-static void  send_notify(btstack_timer_source_t *ts) {
+static void bleSendDataTimerCallback(btstack_timer_source_t *ts) {
   if (analog_enabled) { // if analog reading enabled.
     //Serial.println("characteristic2_notify analog reading ");
     // Read and send out
@@ -174,53 +221,4 @@ static void  send_notify(btstack_timer_source_t *ts) {
   // Restart timer.
   ble.setTimer(ts, 200);
   ble.addTimer(ts);
-}
-
-void setup() {
-  Serial.begin(115200);
-  delay(5000);
-  Serial.println("Simple Controls demo.");
-
-  // Initialize ble_stack.
-  ble.init();
-  configureBLE(); //lots of standard initialization hidden in here - see ble_config.cpp
-  // Set BLE advertising data
-  ble.setAdvertisementData(sizeof(adv_data), adv_data);
-  
-  // Register BLE callback functions
-  ble.onDataWriteCallback(bleWriteCallback);
-
-  // Add user defined service and characteristics
-  ble.addService(service1_uuid);
-  receive_handle = ble.addCharacteristicDynamic(service1_tx_uuid, ATT_PROPERTY_NOTIFY|ATT_PROPERTY_WRITE|ATT_PROPERTY_WRITE_WITHOUT_RESPONSE, receive_data, RECEIVE_MAX_LEN);
-  send_handle = ble.addCharacteristicDynamic(service1_rx_uuid, ATT_PROPERTY_NOTIFY, send_data, SEND_MAX_LEN);
-
-  // BLE peripheral starts advertising now.
-  ble.startAdvertising();
-  Serial.println("BLE start advertising.");
-
-  /*
-   * TODO: This is where you can initialize all peripheral/pin modes
-   */
-  pinMode(DIGITAL_OUT_PIN, OUTPUT);
-  pinMode(DIGITAL_IN_PIN, INPUT_PULLUP);
-  pinMode(PWM_PIN, OUTPUT);
-  
-  // Default to write a high value, change it if you need
-  digitalWrite(DIGITAL_IN_PIN, HIGH);
-  
-  // Initial the servo as always with Arduino board
-  myservo.attach(SERVO_PIN);
-  myservo.write(0);
-
-  // Start a task to check status of the pins on your RedBear Duo
-  // Works by polling every X milliseconds where X is currently 500
-  send_characteristic.process = &send_notify;
-  ble.setTimer(&send_characteristic, 500); //500ms
-  ble.addTimer(&send_characteristic);
-}
-
-void loop() 
-{
-  // Not currently used. The "meat" of the program is in the callback bleWriteCallback and send_notify
 }
