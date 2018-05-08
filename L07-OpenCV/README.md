@@ -30,7 +30,7 @@ Some things you must do:
 <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
 <uses-feature android:name="android.hardware.camera.front.autofocus" android:required="false"/>
 ```
-* For API 23+, you must also get the user's permission at runtime in addition to the manifest permission settings. Add this code and call it from onCreate in your MainActivity class
+* For API 23+, you must also get the user's permission at runtime in addition to the manifest permission settings. Add this code and call it from onCreate in your MainActivity class. When the permission pop-up appears, please grant the app permission to the camera. Note: you may have to run the app twice--the first time to grant the app permission and the second time it should run. Alternatively, you can go into Settings -> Apps -> `<name of your app>` -> Permissions -> Camera and grant the app permissions that way.
 ```
   public static void verifyAndAskForExternalStoragePermissions(Activity activity) {
         // Check if we have write permission
