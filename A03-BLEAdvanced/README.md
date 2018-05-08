@@ -1,7 +1,9 @@
-AdvancedBLE is a more sophisticated version of [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) that demonstrates two-way communicaiton between Anrdoid and the RedBear Duo. We recommend starting with [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) first and then playing with AdvancedBLE.
+AdvancedBLE is a more sophisticated version of [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) that demonstrates two-way communication between Android and the RedBear Duo. We recommend starting with [BasicBLE](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEBasic) first and then playing with AdvancedBLE.
+
+[![BLEAdvanced Demo](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/A03-BLEAdvanced/YouTubeDemoScreenshot.png)](https://youtu.be/FX6jjLPIqnI "BLEAdvanced Demo")
 
 # Arduino Sketch
-1. The basic configuration is set up ble_config.h and ble_config.cpp.
+1. The basic configuration is set up in ble_config.h and ble_config.cpp.
 2. In the Arduino sketch, you need to define a name for your Duo board in the variable BLE_SHORT_NAME so that your Android app could find your board. The length of the name should not be longer than 8 chars.
 Besides the device name, you need to explicitly define the length of the device name in the variable BLE_SHORT_NAME_LEN in Hex. Note the value is one char longer than the actual length of the device name. For example, if your device name is “Biscuit”, BLE_SHORT_NAME_LEN should be set as 0x08.
 3. Do not change: UUID, TX UUID, and RX UUID.
@@ -15,7 +17,7 @@ Besides the device name, you need to explicitly define the length of the device 
 <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 <uses-feature android:name="android.hardware.bluetooth_le"  android:required="true" />
 ```
-3. Also add the markup <service> under <application> (this is important because otherwise we cannot use RBLService):
+3. Also add the markup `<service>` under `<application>` (this is important because otherwise we cannot use RBLService):
 ```
 <service android:name=".RBLService" android:enabled="true" />
 ```
