@@ -48,6 +48,13 @@ Some things you must do:
         }
     }
  ```
+# Manually Installing the OpenCV Manager
+The OpenCV Manager on the Google Play store is outdated. Thus, you must manually install the OpenCV Manager in order to use the example source code (e.g., both the code I've posted to github as well as the code in /OpenCV-3.4.1-android-sdk/samples). Follow the directions below.
+
+1. Go to "OpenCV-3.4.1-android-sdk\apk" and find the OpenCV manager apk that corresponds to your smartphone or tablet's microprocessor.
+2. The Huawei Honor7X uses a 64-bit Kirin 659 ARM-based microprocessor. Thus, we will use "OpenCV_3.4.1_Manager_3.41_arm64-v8a.apk" 
+3. From the terminal, type `> adb install OpenCV_3.4.1_Manager_3.41_arm64-v8a.apk` (If the adb command is not found, you might have to add platform-tools to your path. See https://stackoverflow.com/a/7609388).
+
 # Problems
 * Can't get Canny edge detector to work. Received the following error:
 ```
