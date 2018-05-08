@@ -24,6 +24,7 @@ const int LED_OUTPUT_PIN = D0;
 
 int _brightness = 0;    // how bright the LED is
 int _fadeAmount = 5;    // the amount to fade the LED by on each step
+int _minBrightness = 0;
 int _maxBrightness = 128; // the max allowable analogWrite value is 255
 
 void setup() {
@@ -39,7 +40,7 @@ void loop() {
   _brightness = _brightness + _fadeAmount;
 
   // reverse the direction of the fading at the ends of the fade:
-  if (_brightness <= 0 || _brightness >= _maxBrightness) {
+  if (_brightness <= _minBrightness || _brightness >= _maxBrightness) {
     _fadeAmount = -_fadeAmount;
   }
   
