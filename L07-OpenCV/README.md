@@ -19,6 +19,15 @@ Notes on starting an Android OpenCV project in Android Studio.
 
 9. Now you can start using and building apps with the OpenCV Android library! For a simple example based on the [Hello OpenCV Sample](https://docs.opencv.org/2.4/doc/tutorials/introduction/android_binary_package/dev_with_OCV_on_Android.html#hello-opencv-sample), see OpenCVTest.
 
+10. When opening OpenCV-based Android apps, you may be greeted by an "Android Gradle Plugin Update Recommended" pop-up dialog with three options: "Update", "Remind me tomorrow", "Don't remind me again for this project." Select the latter. Do not update!
+
+# Manually Installing the OpenCV Manager
+The OpenCV Manager on the Google Play store is outdated. Thus, you must manually install the OpenCV Manager in order to use the example source code (e.g., both the code I've posted to github as well as the code in /OpenCV-3.4.1-android-sdk/samples). Follow the directions below.
+
+1. Go to "OpenCV-3.4.1-android-sdk\apk" and find the OpenCV manager apk that corresponds to your smartphone or tablet's microprocessor.
+2. The Huawei Honor7X uses a 64-bit Kirin 659 ARM-based microprocessor. Thus, we will use "OpenCV_3.4.1_Manager_3.41_arm64-v8a.apk" 
+3. From the terminal, type `> adb install OpenCV_3.4.1_Manager_3.41_arm64-v8a.apk` (If the adb command is not found, you might have to add platform-tools to your path. See https://stackoverflow.com/a/7609388).
+
 # Building a Basic App
 Some things you must do:
 * In AndroidManifest.xml, add the following just after `</application>`:
@@ -48,15 +57,11 @@ Some things you must do:
         }
     }
  ```
-# Manually Installing the OpenCV Manager
-The OpenCV Manager on the Google Play store is outdated. Thus, you must manually install the OpenCV Manager in order to use the example source code (e.g., both the code I've posted to github as well as the code in /OpenCV-3.4.1-android-sdk/samples). Follow the directions below.
-
-1. Go to "OpenCV-3.4.1-android-sdk\apk" and find the OpenCV manager apk that corresponds to your smartphone or tablet's microprocessor.
-2. The Huawei Honor7X uses a 64-bit Kirin 659 ARM-based microprocessor. Thus, we will use "OpenCV_3.4.1_Manager_3.41_arm64-v8a.apk" 
-3. From the terminal, type `> adb install OpenCV_3.4.1_Manager_3.41_arm64-v8a.apk` (If the adb command is not found, you might have to add platform-tools to your path. See https://stackoverflow.com/a/7609388).
 
 # Problems
-* Can't get Canny edge detector to work. Received the following error:
+
+## Canny Edge Detector Throws Exception
+Can't get Canny edge detector to work. Received the following error:
 ```
 E/art: No implementation found for void org.opencv.imgproc.Imgproc.Canny_3(long, long, double, double) (tried Java_org_opencv_imgproc_Imgproc_Canny_13 and Java_org_opencv_imgproc_Imgproc_Canny_13__JJDD)
 E/AndroidRuntime: FATAL EXCEPTION: Thread-7
@@ -69,7 +74,7 @@ E/AndroidRuntime: FATAL EXCEPTION: Thread-7
                       at org.opencv.android.JavaCameraView$CameraWorker.run(JavaCameraView.java:373)
                       at java.lang.Thread.run(Thread.java:776)
 ```
-From Googling, I found that perhaps the OpenCV Manager on the Play Store is outdated (see [link](https://github.com/opencv/opencv/issues/9497#issuecomment-340000573)).
+From Googling, I found that perhaps the OpenCV Manager on the Play Store is outdated (see [link](https://github.com/opencv/opencv/issues/9497#issuecomment-340000573)). See the subsection entitled "Manually Installing the OpenCV Manager." Once I did this, the Canny Edge detector worked great!
 
 # Resources
 A few resources I found and used when attempting to setup Android Studio for OpenCV development.
