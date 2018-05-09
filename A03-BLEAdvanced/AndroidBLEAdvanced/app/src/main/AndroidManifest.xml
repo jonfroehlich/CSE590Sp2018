@@ -2,20 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lianghe.android_ble_advanced">
 
-    <!-- If you change the targetSdkVersion to something higher than ~23, I believe, you need
-         to request ACCESS_FINE_LOCATION or ACCESS_COARSE_LOCATION in order to call BluetoothAdapter.startLeScan
-         In addition, you will have to add in code to ask for runtime permissions.
-         See:
-            - https://developer.android.com/guide/topics/permissions/overview
-            - https://developer.android.com/training/permissions/requesting#java
-            - https://developer.android.com/training/permissions/usage-notes -->
-    <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="18" />
-
     <!-- Declare the Bluetooth permissions in the manifest. Learn more about Bluetooth on Android
      development: https://developer.android.com/guide/topics/connectivity/bluetooth-->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
