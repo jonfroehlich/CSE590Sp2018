@@ -71,9 +71,15 @@ import java.util.UUID;
  * }
  * }</pre>
  *
- * <p>This code is loosely based on the Bluetooth LE code by Liang He and the RedBearLab team. See
- * https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEAdvanced/AndroidBLEAdvanced and
- * https://github.com/RedBearLab/Android.
+ * <p>This code was written by CSE590 student Chris Dziemborowicz based on the Bluetooth LE
+ * code by CSE590 instructors Liang He and Jon Froehlich and the RedBearLab team.
+ *
+ * Said code was awesome and thus pulled into the main CSE590 code repo via a pull request
+ * so all code benefit: :)
+ *   - https://github.com/jonfroehlich/CSE590Sp2018/pull/7
+ *
+ * See:
+ *  - https://github.com/RedBearLab/Android.
  */
 public class BLEDevice {
 
