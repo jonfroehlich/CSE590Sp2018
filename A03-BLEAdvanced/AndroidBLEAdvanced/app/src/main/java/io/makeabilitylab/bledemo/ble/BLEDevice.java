@@ -256,31 +256,31 @@ public class BLEDevice {
 
   private void notifyConnected() {
     for (BLEListener listener : listeners) {
-      listener.onConnected();
+      listener.onBleConnected();
     }
   }
 
   private void notifyConnectFailed() {
     for (BLEListener listener : listeners) {
-      listener.onConnectFailed();
+      listener.onBleConnectFailed();
     }
   }
 
   private void notifyDisconnected() {
     for (BLEListener listener : listeners) {
-      listener.onDisconnected();
+      listener.onBleDisconnected();
     }
   }
 
   private void notifyDataReceived(byte[] data) {
     for (BLEListener listener : listeners) {
-      listener.onDataReceived(data);
+      listener.onBleDataReceived(data);
     }
   }
 
   private void notifyRssiChanged(int rssi) {
     for (BLEListener listener : listeners) {
-      listener.onRssiChanged(rssi);
+      listener.onBleRssiChanged(rssi);
     }
   }
 

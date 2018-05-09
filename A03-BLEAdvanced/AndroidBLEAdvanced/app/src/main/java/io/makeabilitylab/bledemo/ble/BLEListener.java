@@ -3,17 +3,17 @@ package io.makeabilitylab.bledemo.ble;
 /** Listens to events related to the device. */
 public interface BLEListener {
   /** Invoked when the device is connected. */
-  void onConnected();
+  void onBleConnected();
 
   /** Invoked when a connection attempt to the device is not successful. */
-  void onConnectFailed();
+  void onBleConnectFailed();
 
   /** Invoked when the device is disconnected. */
-  void onDisconnected();
+  void onBleDisconnected();
 
   /** Invoked when data is received from the device. */
-  void onDataReceived(byte[] data);
+  void onBleDataReceived(byte[] data);
 
   /** Invoked when the RSSI for the connected device changes. */
-  void onRssiChanged(int rssi);
+  void onBleRssiChanged(int rssi);
 }

@@ -251,13 +251,13 @@ public class MainActivity extends AppCompatActivity implements BLEListener {
     }
 
     @Override
-    public void onConnected() {
+    public void onBleConnected() {
         Toast.makeText(getApplicationContext(), "Connected", Toast.LENGTH_SHORT).show();
         setButtonEnable();
     }
 
     @Override
-    public void onConnectFailed() {
+    public void onBleConnectFailed() {
         Toast toast = Toast
                 .makeText(
                         MainActivity.this,
@@ -268,18 +268,18 @@ public class MainActivity extends AppCompatActivity implements BLEListener {
     }
 
     @Override
-    public void onDisconnected() {
+    public void onBleDisconnected() {
         Toast.makeText(getApplicationContext(), "Disconnected", Toast.LENGTH_SHORT).show();
         setButtonDisable();
     }
 
     @Override
-    public void onDataReceived(byte[] data) {
+    public void onBleDataReceived(byte[] data) {
         readAnalogInValue(data);
     }
 
     @Override
-    public void onRssiChanged(int rssi) {
+    public void onBleRssiChanged(int rssi) {
         displayData(rssi);
     }
 }
