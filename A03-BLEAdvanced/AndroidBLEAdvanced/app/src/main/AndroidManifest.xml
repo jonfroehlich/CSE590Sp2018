@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.lianghe.android_ble_advanced">
+    package="io.makeabilitylab.bledemo">
 
     <!-- Declare the Bluetooth permissions in the manifest. Learn more about Bluetooth on Android
      development: https://developer.android.com/guide/topics/connectivity/bluetooth-->
@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.lianghe.android_ble_advanced.MainActivity">
+        <activity android:name="io.makeabilitylab.bledemo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,9 +26,9 @@
 
         <!-- Declare the service that we want to use in our application in the manifest. Learn more
         about Service in Android development: https://developer.android.com/guide/components/services-->
-        <service
-            android:name="com.example.lianghe.android_ble_advanced.BLE.RBLService"
-            android:enabled="true" />
+        <!--<service-->
+            <!--android:name="io.makeabilitylab.bledemo.BLE.RBLService"-->
+            <!--android:enabled="true" />-->
     </application>
 
 </manifest>

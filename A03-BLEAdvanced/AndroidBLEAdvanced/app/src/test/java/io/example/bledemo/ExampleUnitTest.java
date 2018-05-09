@@ -1,4 +1,4 @@
-package com.example.lianghe.android_ble_advanced;
+package io.example.bledemo;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.lianghe.android_ble_advanced;
+package io.makeabilitylab.bledemo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
