@@ -20,9 +20,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import com.example.lianghe.android_ble_advanced.ble.BLEDevice;
+import com.example.lianghe.android_ble_advanced.ble.BLEListener;
+import com.example.lianghe.android_ble_advanced.ble.BLEUtil;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements RedBearDuo.Listener {
+public class MainActivity extends AppCompatActivity implements BLEListener {
 
     // TODO: Define your device name and the length of the name. For your assignment, do not use the
     // default name or you will not be able to discriminate your board from everyone else's board.
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
     private SeekBar mServoSeekBar, mPWMSeekBar;
 
     // Declare all Bluetooth stuff
-    private RedBearDuo mRedBearDuo;
+    private BLEDevice mBLEDevice;
 
     private void setButtonDisable() {
         mDigitalOutBtn.setEnabled(false);
@@ -63,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
     // Display the received RSSI on the interface
     private void displayData(int rssi) {
         mRssiValue.setText(String.format(Locale.US, "%d", rssi));
-        mDeviceName.setText(mRedBearDuo.getName());
-        mUUID.setText(mRedBearDuo.getUUID().toString());
+        mDeviceName.setText(mBLEDevice.getName());
+        mUUID.setText(mBLEDevice.getUUID().toString());
     }
 
     // Display the received Analog/Digital read on the interface
@@ -105,8 +108,8 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
         mConnectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mRedBearDuo.getState() == RedBearDuo.State.CONNECTED) {
-                    mRedBearDuo.disconnect();
+                if (mBLEDevice.getState() == BLEDevice.State.CONNECTED) {
+                    mBLEDevice.disconnect();
                 } else {
                     //TODO: Ideally we would present the user with a "wait" message until
                     //a connection was made or a timeout occurred... but this is better than nothing for now
@@ -116,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
                             Toast.LENGTH_LONG);
                     toast.show();
 
-                    mRedBearDuo.connect();
+                    mBLEDevice.connect();
                 }
             }
         });
@@ -131,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
                     buf[1] = 0x01;
                 else
                     buf[1] = 0x00;
-                mRedBearDuo.sendData(buf);
+                mBLEDevice.sendData(buf);
             }
         });
 
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
                     buf[1] = 0x01;
                 else
                     buf[1] = 0x00;
-                mRedBearDuo.sendData(buf);
+                mBLEDevice.sendData(buf);
             }
         });
 
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 byte[] buf = new byte[] { (byte) 0x03, (byte) 0x00, (byte) 0x00 };
                 buf[1] = (byte) mServoSeekBar.getProgress();
-                mRedBearDuo.sendData(buf);
+                mBLEDevice.sendData(buf);
             }
         });
 
@@ -179,12 +182,12 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 byte[] buf = new byte[] { (byte) 0x02, (byte) 0x00, (byte) 0x00 };
                 buf[1] = (byte) mPWMSeekBar.getProgress();
-                mRedBearDuo.sendData(buf);
+                mBLEDevice.sendData(buf);
             }
         });
 
         // Make sure that Bluetooth is supported.
-        if (!RedBearDuoUtil.isSupported(this)) {
+        if (!BLEUtil.isSupported(this)) {
             Toast.makeText(this, "Ble not supported", Toast.LENGTH_SHORT)
                     .show();
             finish();
@@ -192,41 +195,41 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
         }
 
         // Make sure that we have required permissions.
-        if (!RedBearDuoUtil.hasPermission(this)) {
-            RedBearDuoUtil.requestPermission(this);
+        if (!BLEUtil.hasPermission(this)) {
+            BLEUtil.requestPermission(this);
         }
 
         // Make sure that Bluetooth is enabled.
-        if (!RedBearDuoUtil.isBluetoothEnabled(this)) {
-            RedBearDuoUtil.requestEnableBluetooth(this);
+        if (!BLEUtil.isBluetoothEnabled(this)) {
+            BLEUtil.requestEnableBluetooth(this);
         }
 
-        mRedBearDuo = new RedBearDuo(this, TARGET_DEVICE_NAME);
-        mRedBearDuo.addListener(this);
+        mBLEDevice = new BLEDevice(this, TARGET_DEVICE_NAME);
+        mBLEDevice.addListener(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (!RedBearDuoUtil.isBluetoothEnabled(this)) {
-            RedBearDuoUtil.requestEnableBluetooth(this);
+        if (!BLEUtil.isBluetoothEnabled(this)) {
+            BLEUtil.requestEnableBluetooth(this);
         }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (mRedBearDuo != null) {
-            mRedBearDuo.disconnect();
+        if (mBLEDevice != null) {
+            mBLEDevice.disconnect();
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // User chose not to enable Bluetooth.
-        if (requestCode == RedBearDuoUtil.REQUEST_ENABLE_BLUETOOTH
-                && !RedBearDuoUtil.isBluetoothEnabled(this)) {
+        if (requestCode == BLEUtil.REQUEST_ENABLE_BLUETOOTH
+                && !BLEUtil.isBluetoothEnabled(this)) {
             finish();
             return;
         }
@@ -238,8 +241,8 @@ public class MainActivity extends AppCompatActivity implements RedBearDuo.Listen
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
         @NonNull int[] grantResults) {
         // User chose not to grant required permissions.
-        if (requestCode == RedBearDuoUtil.REQUEST_BLUETOOTH_PERMISSIONS
-                && !RedBearDuoUtil.hasPermission(this)) {
+        if (requestCode == BLEUtil.REQUEST_BLUETOOTH_PERMISSIONS
+                && !BLEUtil.hasPermission(this)) {
             finish();
             return;
         }

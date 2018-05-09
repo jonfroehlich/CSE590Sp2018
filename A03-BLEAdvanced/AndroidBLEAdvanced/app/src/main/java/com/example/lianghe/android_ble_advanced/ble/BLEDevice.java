@@ -1,4 +1,4 @@
-package com.example.lianghe.android_ble_advanced;
+package com.example.lianghe.android_ble_advanced.ble;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -23,24 +23,24 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Bi-directionally communicates with a RedBear Duo board through BLE.
+ * Bi-directionally communicates with a device through BLE.
  *
  * <pre>{@code
  * public class MainActivity extends AppCompatActivity {
- *   private RedBearDuo redBearDuo;
+ *   private BLEDevice bleDevice;
  *
  *   @Override
  *   protected void onCreate(Bundle savedInstanceState) {
  *     super.onCreate(savedInstanceState);
  *     setContentView(R.layout.activity_main);
  *
- *     redBearDuo = new RedBearDuo(this, "myname");
- *     redBearDuo.addListener(
- *         new RedBearDuo.Listener() {
+ *     bleDevice = new BLEDevice(this, "myname");
+ *     bleDevice.addListener(
+ *         new BLEListener() {
  *           @Override
  *           public void onConnected() {
  *             byte[] data = ...
- *             redBearDuo.sendData(data);
+ *             bleDevice.sendData(data);
  *           }
  *
  *           @Override
@@ -60,13 +60,13 @@ import java.util.UUID;
  *   @Override
  *   protected void onStart() {
  *     super.onStart();
- *     redBearDuo.connect();
+ *     bleDevice.connect();
  *   }
  *
  *   @Override
  *   protected void onStop() {
  *     super.onStop();
- *     redBearDuo.disconnect();
+ *     bleDevice.disconnect();
  *   }
  * }
  * }</pre>
@@ -75,29 +75,11 @@ import java.util.UUID;
  * https://github.com/jonfroehlich/CSE590Sp2018/tree/master/A03-BLEAdvanced/AndroidBLEAdvanced and
  * https://github.com/RedBearLab/Android.
  */
-public class RedBearDuo {
-
-  /** Listens to events related to the RedBear Duo board. */
-  public interface Listener {
-    /** Invoked when the RedBear Duo board is connected. */
-    void onConnected();
-
-    /** Invoked when a connection attempt to the RedBear Duo board is not successful. */
-    void onConnectFailed();
-
-    /** Invoked when the RedBear Duo board is disconnected. */
-    void onDisconnected();
-
-    /** Invoked when data is received from the RedBear Duo board. */
-    void onDataReceived(byte[] data);
-
-    /** Invoked when the RSSI for the connected RedBear Duo board changes. */
-    void onRssiChanged(int rssi);
-  }
+public class BLEDevice {
 
   /**
    * A value indicating whether this instance is connecting to, connected to, or disconnected from
-   * the RedBear Duo board.
+   * the device.
    */
   public enum State {
     DISCONNECTED,
@@ -105,7 +87,7 @@ public class RedBearDuo {
     CONNECTED,
   }
 
-  private static final String TAG = RedBearDuo.class.getSimpleName();
+  private static final String TAG = BLEDevice.class.getSimpleName();
 
   private static UUID CLIENT_CHARACTERISTIC_CONFIG_UUID =
       UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
@@ -128,7 +110,7 @@ public class RedBearDuo {
   private BluetoothGatt bluetoothGatt;
   private BluetoothGattCharacteristic txCharacteristic;
 
-  private final List<Listener> listeners = new ArrayList<>();
+  private final List<BLEListener> listeners = new ArrayList<>();
 
   private final ScanCallback scanCallback =
       new ScanCallback() {
@@ -146,11 +128,11 @@ public class RedBearDuo {
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
           switch (newState) {
             case BluetoothProfile.STATE_CONNECTED:
-              handler.post(RedBearDuo.this::onGattConnected);
+              handler.post(BLEDevice.this::onGattConnected);
               break;
 
             case BluetoothProfile.STATE_DISCONNECTED:
-              handler.post(RedBearDuo.this::onGattDisconnected);
+              handler.post(BLEDevice.this::onGattDisconnected);
               break;
           }
         }
@@ -158,18 +140,18 @@ public class RedBearDuo {
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
           if (status != BluetoothGatt.GATT_SUCCESS) {
-            Log.w(TAG, "RedBearDuo onServicesDiscovered reported " + status);
+            Log.w(TAG, "BLEDevice onServicesDiscovered reported " + status);
             return;
           }
 
-          handler.post(RedBearDuo.this::onGattServicesDiscovered);
+          handler.post(BLEDevice.this::onGattServicesDiscovered);
         }
 
         @Override
         public void onCharacteristicRead(
             BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
           if (status != BluetoothGatt.GATT_SUCCESS) {
-            Log.w(TAG, "RedBearDuo onCharacteristicRead reported " + status);
+            Log.w(TAG, "BLEDevice onCharacteristicRead reported " + status);
             return;
           }
 
@@ -189,7 +171,7 @@ public class RedBearDuo {
         @Override
         public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
           if (status != BluetoothGatt.GATT_SUCCESS) {
-            Log.w(TAG, "RedBearDuo onReadRemoteRssi reported " + status);
+            Log.w(TAG, "BLEDevice onReadRemoteRssi reported " + status);
             return;
           }
 
@@ -198,12 +180,12 @@ public class RedBearDuo {
       };
 
   /**
-   * Creates a new instance of the {@see RedBearDuo} class.
+   * Creates a new instance of the {@see BLEDevice} class.
    *
    * @param context a {@see Context}
-   * @param name the name of the RedBear Duo board to connect to (must be 8 characters or less)
+   * @param name the name of the device to connect to (must be 8 characters or less)
    */
-  public RedBearDuo(Context context, String name) {
+  public BLEDevice(Context context, String name) {
     if (context == null || name == null || name.length() > 8) {
       throw new IllegalArgumentException();
     }
@@ -226,14 +208,14 @@ public class RedBearDuo {
     bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
   }
 
-  /** Returns the name of the RedBear Duo board that this instance communicates with. */
+  /** Returns the name of the device that this instance communicates with. */
   public String getName() {
     return name;
   }
 
   /**
-   * Returns the address of teh RedBear Duo board that is currently connected, or null if no board
-   * is currently connected.
+   * Returns the address of the device that is currently connected, or null if no board is currently
+   * connected.
    */
   public @Nullable String getAddress() {
     if (state == State.CONNECTED) {
@@ -243,61 +225,61 @@ public class RedBearDuo {
     }
   }
 
-  /** Returns the service UUID of the RedBear Duo board. This value is a constant. */
+  /** Returns the service UUID of the device. This value is a constant. */
   public UUID getUUID() {
     return SERVICE_UUID;
   }
 
   /**
    * Returns a {@see State} value indicating whether this instance is connecting to, connected to,
-   * or disconnected from the RedBear Duo board.
+   * or disconnected from the device.
    */
   public State getState() {
     return state;
   }
 
   /** Adds a listener. */
-  public void addListener(Listener listener) {
+  public void addListener(BLEListener listener) {
     listeners.add(listener);
   }
 
   /** Removes a listener. */
-  public void removeListener(Listener listener) {
+  public void removeListener(BLEListener listener) {
     listeners.remove(listener);
   }
 
   private void notifyConnected() {
-    for (Listener listener : listeners) {
+    for (BLEListener listener : listeners) {
       listener.onConnected();
     }
   }
 
   private void notifyConnectFailed() {
-    for (Listener listener : listeners) {
+    for (BLEListener listener : listeners) {
       listener.onConnectFailed();
     }
   }
 
   private void notifyDisconnected() {
-    for (Listener listener : listeners) {
+    for (BLEListener listener : listeners) {
       listener.onDisconnected();
     }
   }
 
   private void notifyDataReceived(byte[] data) {
-    for (Listener listener : listeners) {
+    for (BLEListener listener : listeners) {
       listener.onDataReceived(data);
     }
   }
 
   private void notifyRssiChanged(int rssi) {
-    for (Listener listener : listeners) {
+    for (BLEListener listener : listeners) {
       listener.onRssiChanged(rssi);
     }
   }
 
   /**
-   * Attempts to connect to the RedBear Duo board.
+   * Attempts to connect to the device.
    *
    * <p>{@see Listener#onConnected} is called when the connection attempt succeeds. If the
    * connection attempt does not succeed, {@see Listener#onConnectFailed} is called instead.
@@ -306,12 +288,12 @@ public class RedBearDuo {
    */
   public void connect() {
     if (state != State.DISCONNECTED) {
-      Log.w(TAG, "RedBearDuo already connecting or connected.");
+      Log.w(TAG, "BLEDevice already connecting or connected.");
       return;
     }
 
     state = State.CONNECTING;
-    Log.i(TAG, "RedBearDuo connecting...");
+    Log.i(TAG, "BLEDevice connecting...");
     startScan();
   }
 
@@ -326,7 +308,7 @@ public class RedBearDuo {
 
     // If we did not find a device while connecting, stop trying to connect.
     if (state == State.CONNECTING && device == null) {
-      Log.e(TAG, "Failed to find RedBearDuo device.");
+      Log.e(TAG, "Failed to find BLEDevice device.");
       disconnect();
     }
   }
@@ -340,7 +322,7 @@ public class RedBearDuo {
     // Connect Bluetooth GATT.
     device = result.getDevice();
     bluetoothGatt = device.connectGatt(context, false /* autoConnect */, gattCallback);
-    Log.i(TAG, "RedBearDuo found (" + device.getAddress() + ").");
+    Log.i(TAG, "BLEDevice found (" + device.getAddress() + ").");
   }
 
   private void onGattConnected() {
@@ -350,7 +332,7 @@ public class RedBearDuo {
 
     boolean success = bluetoothGatt.discoverServices();
     if (!success) {
-      Log.e(TAG, "Failed to discover GATT services for RedBearDuo device.");
+      Log.e(TAG, "Failed to discover GATT services for BLEDevice device.");
       disconnect();
     }
   }
@@ -363,7 +345,7 @@ public class RedBearDuo {
     // Get the GATT service.
     BluetoothGattService service = bluetoothGatt.getService(SERVICE_UUID);
     if (service == null) {
-      Log.e(TAG, "Failed to get GATT service for RedBearDuo.");
+      Log.e(TAG, "Failed to get GATT service for BLEDevice.");
       disconnect();
       return;
     }
@@ -371,7 +353,7 @@ public class RedBearDuo {
     // Configure the RX characteristic.
     BluetoothGattCharacteristic rxCharacteristic = service.getCharacteristic(RX_UUID);
     if (rxCharacteristic == null) {
-      Log.e(TAG, "Failed to get RX characteristic for RedBearDuo.");
+      Log.e(TAG, "Failed to get RX characteristic for BLEDevice.");
       disconnect();
       return;
     }
@@ -385,7 +367,7 @@ public class RedBearDuo {
     // Configure the TX characteristic.
     txCharacteristic = service.getCharacteristic(TX_UUID);
     if (txCharacteristic == null) {
-      Log.e(TAG, "Failed to get TX characteristic for RedBearDuo.");
+      Log.e(TAG, "Failed to get TX characteristic for BLEDevice.");
       disconnect();
       return;
     }
@@ -394,7 +376,7 @@ public class RedBearDuo {
     readRssi();
 
     state = State.CONNECTED;
-    Log.i(TAG, "RedBearDuo GATT connected (" + device.getAddress() + ").");
+    Log.i(TAG, "BLEDevice GATT connected (" + device.getAddress() + ").");
     notifyConnected();
   }
 
@@ -403,13 +385,13 @@ public class RedBearDuo {
   }
 
   /**
-   * Sends data to the connected RedBear Duo board.
+   * Sends data to the connected device.
    *
-   * <p>If no RedBear Duo board is currently connected, this method does nothing.
+   * <p>If no device is currently connected, this method does nothing.
    */
   public void sendData(byte[] data) {
     if (state != State.CONNECTED) {
-      Log.w(TAG, "Attempted to send data when RedBearDuo is not connected.");
+      Log.w(TAG, "Attempted to send data when BLEDevice is not connected.");
       return;
     }
 
@@ -435,9 +417,9 @@ public class RedBearDuo {
   }
 
   /**
-   * Disconnects from the currently connected RedBear Duo board.
+   * Disconnects from the currently connected device.
    *
-   * <p>If no RedBear Duo board is currently connected, this method does nothing.
+   * <p>If no device is currently connected, this method does nothing.
    */
   public void disconnect() {
     // Clear our fields. This does nothing if we are already disconnected.
@@ -457,13 +439,13 @@ public class RedBearDuo {
     switch (state) {
       case CONNECTING:
         state = State.DISCONNECTED;
-        Log.i(TAG, "RedBearDuo failed to connect.");
+        Log.i(TAG, "BLEDevice failed to connect.");
         notifyConnectFailed();
         break;
 
       case CONNECTED:
         state = State.DISCONNECTED;
-        Log.i(TAG, "RedBearDuo disconnected.");
+        Log.i(TAG, "BLEDevice disconnected.");
         notifyDisconnected();
         break;
     }
