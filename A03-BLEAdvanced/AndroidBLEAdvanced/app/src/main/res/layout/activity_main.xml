@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:background="#FFF"
     android:orientation="vertical"
-    tools:context="com.example.lianghe.android_ble_advanced.MainActivity">
+    tools:context="io.makeabilitylab.bledemo.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

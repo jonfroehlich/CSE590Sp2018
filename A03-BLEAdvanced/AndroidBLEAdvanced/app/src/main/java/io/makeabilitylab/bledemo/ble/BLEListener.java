@@ -1,4 +1,4 @@
-package com.example.lianghe.android_ble_advanced.ble;
+package io.makeabilitylab.bledemo.ble;
 
 /** Listens to events related to the device. */
 public interface BLEListener {

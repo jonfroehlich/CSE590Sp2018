@@ -6,7 +6,7 @@
  * https://github.com/RedBearLab/Android
  */
 
-package com.example.lianghe.android_ble_advanced;
+package io.makeabilitylab.bledemo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,9 +20,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import com.example.lianghe.android_ble_advanced.ble.BLEDevice;
-import com.example.lianghe.android_ble_advanced.ble.BLEListener;
-import com.example.lianghe.android_ble_advanced.ble.BLEUtil;
+import io.makeabilitylab.bledemo.ble.BLEDevice;
+import io.makeabilitylab.bledemo.ble.BLEListener;
+import io.makeabilitylab.bledemo.ble.BLEUtil;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements BLEListener {

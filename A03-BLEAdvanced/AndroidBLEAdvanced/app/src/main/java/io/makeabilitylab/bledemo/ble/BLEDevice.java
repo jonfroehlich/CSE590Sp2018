@@ -1,4 +1,4 @@
-package com.example.lianghe.android_ble_advanced.ble;
+package io.makeabilitylab.bledemo.ble;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
