@@ -24,8 +24,8 @@ const int LED_OUTPUT_PIN = D0;
 
 int _brightness = 0;    // how bright the LED is
 int _fadeAmount = 5;    // the amount to fade the LED by on each step
-int _minBrightness = 0;
-int _maxBrightness = 128; // the max allowable analogWrite value is 255
+int _minBrightness = 0; // the min allowable analogWrite value is 0. Must be less than _maxBrightness
+int _maxBrightness = 128; // the max allowable analogWrite value is 255. Must be greater than _minBrightness
 
 void setup() {
   pinMode(LED_OUTPUT_PIN, OUTPUT);
