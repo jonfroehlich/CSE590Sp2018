@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:keepScreenOn="true">
+
+    <io.makeabilitylab.facetrackerble.camera.CameraSourcePreview
+        android:id="@+id/cameraSourcePreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <io.makeabilitylab.facetrackerble.camera.GraphicOverlay
+            android:id="@+id/faceOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </io.makeabilitylab.facetrackerble.camera.CameraSourcePreview>
+
+    <Button
+        android:id="@+id/buttonFlip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="flip"/>
+
+    <TextView
+        android:id="@+id/textViewBleStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="4dp"
+        android:textSize="11dp"
+        android:textColor="#FFFFFF"
+        android:text="flip"/>
+
+
+</RelativeLayout>
