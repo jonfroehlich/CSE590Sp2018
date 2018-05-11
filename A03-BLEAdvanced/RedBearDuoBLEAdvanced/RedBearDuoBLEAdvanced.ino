@@ -73,6 +73,7 @@ static uint8_t adv_data[] = {
 
 static btstack_timer_source_t send_characteristic;
 static void bleSendDataTimerCallback(btstack_timer_source_t *ts); // function declaration for sending data callback
+int _sendDataFrequency = 200; // 200ms (how often to read the pins and transmit the data to Android)
 
 // Mark whether need to notify analog value to client.
 static boolean analog_enabled = false;
@@ -117,7 +118,7 @@ void setup() {
   // Start a task to check status of the pins on your RedBear Duo
   // Works by polling every X milliseconds where X is currently 500
   send_characteristic.process = &bleSendDataTimerCallback;
-  ble.setTimer(&send_characteristic, 500); //500ms
+  ble.setTimer(&send_characteristic, _sendDataFrequency); 
   ble.addTimer(&send_characteristic);
 }
 
@@ -186,8 +187,8 @@ int bleReceiveDataCallback(uint16_t value_handle, uint8_t *buffer, uint16_t size
  * @param[in]  *ts   
  * @retval None
  * 
- * TODO: Send the data from either analog read or digital read back to 
- * the other BLE-abled devices
+ * Send the data from either analog read or digital read back to 
+ * the connected BLE device (e.g., Android)
  */
 static void bleSendDataTimerCallback(btstack_timer_source_t *ts) {
   if (analog_enabled) { // if analog reading enabled.
@@ -219,6 +220,6 @@ static void bleSendDataTimerCallback(btstack_timer_source_t *ts) {
     }
   }
   // Restart timer.
-  ble.setTimer(ts, 200);
+  ble.setTimer(ts, _sendDataFrequency);
   ble.addTimer(ts);
 }
