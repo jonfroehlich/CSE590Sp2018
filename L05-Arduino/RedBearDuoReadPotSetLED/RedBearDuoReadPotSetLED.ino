@@ -20,6 +20,11 @@
  */
 SYSTEM_MODE(MANUAL); 
 
+// The RedBear Duo appears to have a 12-bit ADC so input values can range from
+// 0 to 4096 (2^12). On the Arduino Uno, there is a 10-bit ADC so values
+// go from 0 to 1023 (2^10 bits).
+#define MAX_ANALOG_INPUT_VAL 4096
+
 const int LED_OUTPUT_PIN = D0;
 const int POT_INPUT_PIN = A0;
 
@@ -34,13 +39,13 @@ void loop() {
   // read the potentiometer value
   int potVal = analogRead(POT_INPUT_PIN);
 
-  // the analogRead on the RedBear Duo seems to go from 0 to 4092 (and not 4095
-  // as you would expect with a power of two--e.g., 2^12 or 12 bits). On the Arduino
-  // Uno, the analogRead ranges from 0 to 1023 (2^10 or 10 bits). Regardless,
-  // we need to remap this value linearly from the large range (0-4092) to
-  // the smaller range (0-255) since the analogWrite function can only write out
-  // 0-255 (a byte--2^8).  
-  int ledVal = map(potVal, 0, 4092, 0, 255);
+  // the analogRead on the RedBear Duo goes from 0 to 4096. We need to remap
+  // this value to the smaller range (0-255) since the analogWrite function can 
+  // only write out 0-255 (a byte--2^8). The map function provides a linear
+  // mapping to do this (however, a better way would likely be some sort of
+  // non-linear mapping given that perceived LED brightness is not linear with current,
+  // perhaps logarithmic)
+  int ledVal = map(potVal, 0, MAX_ANALOG_INPUT_VAL, 0, 255);
 
   // print the raw pot value and the converted led value
   Serial.print(potVal);

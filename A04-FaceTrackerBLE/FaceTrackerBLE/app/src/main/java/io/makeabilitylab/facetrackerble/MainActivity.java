@@ -451,7 +451,7 @@ public class MainActivity extends AppCompatActivity implements BLEListener{
             //
             // You can also turn on Landmark detection to get more information about the face like cheek, ear, mouth, etc.
             //   See: https://developers.google.com/android/reference/com/google/android/gms/vision/face/Landmark
-            boolean isPortrait = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
+            boolean isPortrait = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT);
             String debugFaceInfo = String.format("Portrait: %b Front-Facing Camera: %b FaceId: %d Loc (x,y): (%.1f, %.1f) Size (w, h): (%.1f, %.1f) Left Eye: %.1f Right Eye: %.1f  Smile: %.1f",
                     isPortrait,
                     mIsFrontFacing,

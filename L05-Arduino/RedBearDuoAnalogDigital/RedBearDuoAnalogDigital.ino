@@ -17,6 +17,10 @@
  */
 SYSTEM_MODE(MANUAL); 
 
+// The RedBear Duo appears to have a 12-bit ADC so input values can range from
+// 0 to 4096 (2^12)
+#define MAX_ANALOG_INPUT_VAL 4096
+
 const int ANALOG_INPUT = A0;
 const int DIGITAL_INPUT = D0;
 
@@ -32,9 +36,15 @@ void loop() {
   int analogVal = analogRead(ANALOG_INPUT);
   int digitalVal = digitalRead(DIGITAL_INPUT);
 
-  Serial.print((analogVal / 4092.0) * 3.3);
+  // will scale 0 to 4096 to 0V - 3.3V
+  // You could also write analogValAsVoltage = map(analogVal, 0, MAX_ANALOG_INPUT_VAL, 0, 3.3);
+  float analogValAsVoltage = (analogVal / (float)MAX_ANALOG_INPUT_VAL) * 3.3;
+
+  // will be either 0V (LOW) or 3.3V (HIGH)
+  float digitalValAsVoltage = digitalVal * 3.3; 
+  Serial.print(analogValAsVoltage);
   Serial.print(",");
-  Serial.print(digitalVal * 3.3);
+  Serial.print(digitalValAsVoltage);
   Serial.println();
 
   delay(50);

@@ -16,7 +16,7 @@
  */
 SYSTEM_MODE(MANUAL); 
 
-#define COMMON_ANODE 1
+#define COMMON_ANODE 1 // change this to 0 if you are working with a common cathode RGB LED
 
 const int RGB_RED_PIN = D0;
 const int RGB_GREEN_PIN  = D1;
