@@ -60,6 +60,9 @@ void loop() {
 
   // Measure how long the echo pin was held high (pulse width)
   // Note: the micros() counter will overflow after ~70 min
+  // TODO: We probably need to check for a timeout here just in case
+  // the ECHO_PIN never goes HIGH... so like
+  // while ( digitalRead(ECHO_PIN) == 1 && micros() - t1 < threshold);
   t1 = micros();
   while ( digitalRead(ECHO_PIN) == 1);
   t2 = micros();
