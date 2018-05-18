@@ -13,6 +13,7 @@
  * See also:
  *  - http://www.instructables.com/id/Simple-Arduino-and-HC-SR04-Example/
  *  - https://www.arduino.cc/en/Tutorial/Ping
+ *  - https://howtomechatronics.com/tutorials/arduino/ultrasonic-sensor-hc-sr04/
  */
 
 /* 
