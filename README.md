@@ -10,3 +10,6 @@ The class was broken into roughly five modules:
 * L09-L10: Fabrication
 
 You can view the lectures [here](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/LectureSlides).
+
+## Potential ideas for next time
+- Train and test musical instruments as input to machhine learning algs. Use guitar to play Mario brothers.
