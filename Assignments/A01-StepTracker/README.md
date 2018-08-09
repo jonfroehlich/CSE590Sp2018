@@ -6,10 +6,11 @@ There will be a midpoint check-in on April 5 [link](https://canvas.uw.edu/course
 **Clarification (04/05):** Someone asked on the discussion board: does the Step Tracker have to store tracking data across executions of the app (i.e., data persistence). No, don't worry about that.
 
 # Learning Goals
-Introduce and learn the basics of Android development (e.g., Android Studio, using the emulator, deploying to a device, debugging, the Android architecture).
-Introduce and learn basic methods for accessing and processing built-in sensors on Android.
-Introduce and learn how to apply basic signal processing algorithms in real-time.
-Reflect on and apply basic theories/design principles of persuasive technology (e.g., see [Consolvo et al., CHI'06](https://dl.acm.org/citation.cfm?id=1124840), [Campbell et al., CSCW'08](https://dl.acm.org/citation.cfm?id=1460603)).
+- Introduce and learn the basics of Android development (e.g., Android Studio, using the emulator, deploying to a device, debugging, the Android architecture).
+- Introduce and learn basic methods for accessing and processing built-in sensors on Android.
+- Introduce and learn how to apply basic signal processing algorithms in real-time.
+- Reflect on and apply basic theories/design principles of persuasive technology (e.g., see [Consolvo et al., CHI'06](https://dl.acm.org/citation.cfm?id=1124840), [Campbell et al., CSCW'08](https://dl.acm.org/citation.cfm?id=1460603)).
+
 # Parts
 - [6 pts] Design an algorithm to track steps using the Android smartphone's built-in accelerometer (and, possibly gyroscope). At a minimum, your signal processing approach should include a smoothing filter and a peak detection algorithm. The algorithm should recognize a new step with <= 2 sec latency. You can assume a fixed placement of the phone--e.g., that the user is carrying the device or has it in their pocket. Please make this assumption known in the code and your report.
 
