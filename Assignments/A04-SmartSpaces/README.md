@@ -4,8 +4,8 @@ Having rolled out a very successful line of IoT night lights :), your company ha
 Using some of the computer vision (CV) concepts learned in class along with posted sample code, you are going to create a CV-based motion tracking system that:
 
 - Detects the face of and tracks the movement of at least one user in the Android camera view
-- Measures the distance to that user using the ultrasonic sensor, which is mounted on a servo motor. Using the motion tracking information from Android, the servo motor automatically rotates the ultrasonic sensor so that it is always facing the detected user. We have posted example code for the servo here (Links to an external site.)Links to an external site. and the ultrasonic sensor here (Links to an external site.)Links to an external site.. Note that the servo motor only rotates from 0-180 degrees. 
-- Flashes an LED and plays a tone using the piezoelectric buzzer when the detected user is within 0.5 meters. Note that it appears the tone function only works on pins are: D0, D1, A0, A1, A4, A5, A6, A7, RX, TX. See this Discussion and this forum post (Links to an external site.)Links to an external site..
+- Measures the distance to that user using the ultrasonic sensor, which is mounted on a servo motor. Using the motion tracking information from Android, the servo motor automatically rotates the ultrasonic sensor so that it is always facing the detected user. We have posted example code for the [servo here](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/DemoCode/L06-Arduino/RedBearDuoServoSweep) and the [ultrasonic sensor here](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/DemoCode/L06-Arduino/RedBearDuoUltrasonicRangeFinder). Note that the servo motor only rotates from 0-180 degrees. 
+- Flashes an LED and plays a tone using the piezoelectric buzzer when the detected user is within 0.5 meters. Note that it appears the tone function only works on pins are: D0, D1, A0, A1, A4, A5, A6, A7, RX, TX. See this [Discussion](https://canvas.uw.edu/courses/1199409/discussion_topics/4335655) and this [forum post](https://community.particle.io/t/tone-doesnt-work-solved/5806/7).
 - Has a functional lo-fi stand for the servo that allows the servo to sit robustly on a table or other surface even when the motor is sweeping back and forth and a lo-fi attachment mechanism that affixes the ultrasonic sensor to the servo motor. For A5, you will design and fabricate 3D-printed versions.
 - Includes one creative feature related to the "smart spaces" theme (e.g., face recognition, speech interaction, hand tracking + gesture recognition)
 
@@ -21,7 +21,7 @@ For your deliverables, you will turn in a video demo, all of your source code fo
 As with previous assignments, we expect that you will seek out external sources to help you learn and complete this assignment. Please properly attribute your sources in your report (and in your code).
 
 # Parts
-We have provided significant amounts of skeleton code for this assignment on github (for both Arduino and Android). Please see A04-FaceTrackerBLE (Links to an external site.)Links to an external site..
+We have provided significant amounts of skeleton code for this assignment on github (for both Arduino and Android). Please see the [A04-SmartSpaces/Code](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/Assignments/A04-SmartSpaces/Code) dir in github.
 
 - [4.5 pts] Arduino, circuit, sensors+actuators: The Arduino+hardware portion of this assignment includes: (i) a servo motor that responds, in real-time, to the location of the detected user in the Android camera; (ii) an ultrasonic sensor attached to the servo that measures the distance to the detected user and transmits this data back to Android; (iii) an alarm + flashing LEDs when the detected user is within 0.5 meters
 
