@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PinControlDemo_Android</string>
+    <string name="digital_write">pin D2</string>
+    <string name="digital_read">pin D4</string>
+    <string name="analog_read">pin A5</string>
+    <string name="pwm">pin D3</string>
+    <string name="servo">pin D4</string>
+</resources>
