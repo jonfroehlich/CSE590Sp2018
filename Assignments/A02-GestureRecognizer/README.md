@@ -1,7 +1,7 @@
 # Overview
 Imagine working for a company that would like to use the phone as an input device to an interactive video game system like the XBox or Playstation--for example, using the phone as a paddle in tennis or as a "ball" in bowling. In this assignment, you will build your own 3D gesture recognizer to automatically recognize these gestures.
 
-While in the "real world" you would ultimately need to create a real-time gesture recognizer, for this assignment you will make an *offline* version in Jupyter Notebook. Specifically, you will make two recognizers: (i) a *shape-matching* recognizer such as via a Euclidean distance metric or Dynamic Time Warping and (ii) a *feature-based* (or *model-based*) recognizer using a [support-vector machine (SVM)](http://scikit-learn.org/stable/modules/svm.html)(recommended), [hidden-markov model (HMM)](http://scikit-learn.sourceforge.net/stable/modules/hmm.html), or an alternative supervised learning approach of your choosing (please check with us first). An initial version of your shape-matching recognizer and performance results are due next week for your check-in.
+While in the "real world" you would ultimately need to create a real-time gesture recognizer, for this assignment you will make an *offline* version in Jupyter Notebook. Specifically, you will make two recognizers: (i) a *shape-matching* recognizer such as via a Euclidean distance metric or Dynamic Time Warping and (ii) a *feature-based* (or *model-based*) recognizer using a [support-vector machine (SVM)](http://scikit-learn.org/stable/modules/svm.html) (recommended), [hidden-markov model (HMM)](http://scikit-learn.sourceforge.net/stable/modules/hmm.html), or an alternative supervised learning approach of your choosing (please check with us first). An initial version of your shape-matching recognizer and performance results are due next week for your check-in.
 
 Within Jupyter Notebook, we will use Python 3 and these amazing libraries [numpy](http://www.numpy.org/), [scipy](https://www.scipy.org/), [matplotlib](https://matplotlib.org/), and [scikit-learn](http://scikit-learn.org/). Numpy and scipy provide numeric array handling and signal processing, matplotlib provides visualization, and scikit-learn is the de facto machine learning library in Python. You are welcome to use other libraries as well (e.g., this [DTW library](https://pypi.python.org/pypi/fastdtw)).
 
@@ -33,12 +33,12 @@ For this assignment, you will analyze two gesture sets: (i) the [gesture set I p
 
 Note: to get the files off of the phone's storage, I used ES File Explorer and then shared the selected files with one of my Google Drive accounts (you could also email them but sharing to GDrive was more efficient for me). You can download ES File Explorer from the Google Play Store.
 
-ESFileExplorer_1024w.png
+!["ES File Explorer Screenshot"](https://github.com/jonfroehlich/CSE590Sp2018/blob/master/Assignments/A02-GestureRecognizer/ESFileExplorer_1024w.png)
 
 # Parts
 - [1 pt] Record your own gesture set. See above. 
 
-- [3 pts] Visualize both gesture sets (my recordings of the gestures and your recordings of the gestures) in Jupyter Notebook. Your visualizations should include anything that helps you analyze the signals and aid your signal processing and classification approaches. At the very least, you should visualize the raw x, y, and z accelerometer and gyroscope signals as line graphs (as we did in class) and visualize some sort of frequency analysis (e.g., [spectral density plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.psd.html), [spectrogram](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.specgram.html). Please appropriately label axes, titles, and include legends.
+- [3 pts] Visualize both gesture sets (my recordings of the gestures and your recordings of the gestures) in Jupyter Notebook. Your visualizations should include anything that helps you analyze the signals and aid your signal processing and classification approaches. At the very least, you should visualize the raw x, y, and z accelerometer and gyroscope signals as line graphs (as we did in class) and visualize some sort of frequency analysis (e.g., [spectral density plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.psd.html), [spectrogram](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.specgram.html)). Please appropriately label axes, titles, and include legends.
 
 - [4 pts] Design and implement a shape-matching gesture recognition approach (e.g., using DTW). What transformations of the signal are necessary here (e.g., smoothing, detrending, etc.)?
 
