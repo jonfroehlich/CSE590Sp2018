@@ -2,7 +2,7 @@
 The github repo for CSE590 - Ubiquitous Computing Spring 2018
 
 ## Lectures
-The class was broken into roughly five modules:
+The class is broken into roughly five modules:
 * L01: Introduction to ubicomp and Android
 * L02-L04: Signal processing and machine learning in ubicomp systems
 * L05-L06: Physical computing (Arduino, circuits, sensors, actuators)
