@@ -25,9 +25,9 @@ We will not be using a textbook; however, if you're interested, please see John 
 ## Assignments
 There are three categories of assignments in this course (see the Course Summary below for more details on assignment topics and due dates):
 
-[110 pts] Making: [five implementation assignments](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/Assignments) that enable you to learn and apply core methods, techniques, and approaches in ubiquitous computing (20 pts each + 2 pts for a midpoint check-in). These assignments are due every two weeks. The assignments can be [viewed here](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/Assignments)
-[18 pts] Paper reading + online discussion: each week, we will have one required reading + online discussion (2 pts). For a bonus, you can sign-up to lead an in-class discussion. See: https://canvas.uw.edu/courses/1199409/discussion_topics/4253123.
-[~15 pts] Participation grade: participating in in-class and online discussions (*e.g.,* responding to a post), asking questions in class or on Canvas, and miscellaneous housekeeping assignments (*e.g.,* completing MakerSpace orientation, filling out background survey).
+- [110 pts] Making: [five implementation assignments](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/Assignments) that enable you to learn and apply core methods, techniques, and approaches in ubiquitous computing (20 pts each + 2 pts for a midpoint check-in). These assignments are due every two weeks. The assignments can be [viewed here](https://github.com/jonfroehlich/CSE590Sp2018/tree/master/Assignments)
+- [18 pts] Paper reading + online discussion: each week, we will have one required reading + online discussion (2 pts). For a bonus, you can sign-up to lead an in-class discussion. See: https://canvas.uw.edu/courses/1199409/discussion_topics/4253123.
+- [~15 pts] Participation grade: participating in in-class and online discussions (*e.g.,* responding to a post), asking questions in class or on Canvas, and miscellaneous housekeeping assignments (*e.g.,* completing MakerSpace orientation, filling out background survey).
 
 ## More Details
 For more details and the full course syllabus, please see the course on Canvas [here](https://canvas.uw.edu/courses/1199409).
